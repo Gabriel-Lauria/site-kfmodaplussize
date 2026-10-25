@@ -1,0 +1,17 @@
+  /* palette:start */
+  --color-primary: #7a1d3b;       /* cor principal: botões, títulos em itálico, pílulas ativas */
+  --color-primary-deep: #4a0f24;  /* fundo escuro: hero, vitrine de lojas, rodapé, intro */
+  --color-accent: #e2589b;        /* acento: palavras em destaque, etiquetas, coração */
+  --color-accent-soft: #f6cfdf;   /* acento claro: textos sobre o fundo escuro, faixa do CTA */
+  --color-highlight: #b26b34;     /* terceira cor: brilho do hero, gradiente do Instagram */
+  --color-paper: #fbf7f2;         /* fundo do site */
+  --color-cream: #f3eadf;         /* fundo de cartões e fotos */
+  --color-sand: #e4cfaf;
+  --color-ink: #2b1b20;           /* texto */
+  --color-muted: #7a6a6e;         /* texto secundário */
+  /* partículas que caem do cursor no hero */
+  --color-particle-1: #f7b8d2;
+  --color-particle-2: #ee8db8;
+  --color-particle-3: #e2589b;
+  --color-particle-4: #f9c9dc;
+  /* palette:end */
