@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { BRAND, storageKey } from "@/config";
-import { FlowerMark } from "./FlowerMark";
+import { BrandMark } from "./BrandMark";
 
-// Abertura: a flor desabrocha e "mergulhamos" nela para revelar o site. Uma vez por sessão.
+// Abertura: a marca desabrocha e "mergulhamos" nela para revelar o site. Uma vez por sessão.
 export function Intro() {
   const [show, setShow] = useState(true);
   const [dive, setDive] = useState(false);
@@ -40,7 +40,7 @@ export function Intro() {
             transition={{ duration: 0.9, ease: [0.7, 0, 0.84, 0] }}
           >
             <motion.div animate={{ rotate: 60 }} transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}>
-              <FlowerMark bloom className="h-24 w-24" />
+              <BrandMark bloom className="h-24 w-24" />
             </motion.div>
           </motion.div>
           <motion.p

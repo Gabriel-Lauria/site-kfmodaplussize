@@ -4,7 +4,8 @@ import { useRef } from "react";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "motion/react";
 import { BRAND, CONTACT, FEATURES, STORES, STORES_NAV, waLink } from "@/config";
-import { FlowerMark } from "./FlowerMark";
+import { BrandMark } from "./BrandMark";
+import { Logo } from "./Logo";
 import { Instagram, WhatsApp } from "./Icons";
 
 export function Footer() {
@@ -18,8 +19,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-[1400px] gap-12 px-4 pb-10 pt-20 sm:px-8 md:grid-cols-[1.4fr_1fr_1.4fr_1fr]">
         <div>
           <div className="flex items-center gap-3">
-            <FlowerMark className="h-10 w-10" />
-            <span className="font-display text-2xl">{BRAND.name}</span>
+            <Logo markClassName="h-10 w-10" textClassName="font-display text-2xl" imageClassName="h-10 w-auto" />
           </div>
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-paper/70">{BRAND.footer.about}</p>
           <div className="mt-6 flex gap-2">
@@ -84,7 +84,7 @@ export function Footer() {
         <motion.p style={{ y }} className="flex select-none items-center gap-[2vw] whitespace-nowrap font-display text-[17vw] leading-[0.8] tracking-tight text-paper/[0.07]">
           {BRAND.wordmark[0]}
           <motion.span style={{ rotate }} className="inline-block">
-            <FlowerMark mono="#E2589B" className="h-[12vw] w-[12vw] opacity-60" />
+            <BrandMark mono="var(--color-accent)" className="h-[12vw] w-[12vw] opacity-60" />
           </motion.span>
           {BRAND.wordmark[1]}
         </motion.p>

@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
 import { BRAND, CONTACT, HOME_CATEGORIES, PRODUCTS, waLink } from "@/config";
-import { FlowerMark } from "../FlowerMark";
+import { BrandMark } from "../BrandMark";
 import { Magnetic } from "../Magnetic";
 import { ProductCard } from "../ProductCard";
 import { Reveal, SplitWords } from "../motion-utils";
@@ -158,7 +158,7 @@ export function Manifesto() {
   return (
     <section ref={ref} className="mx-auto max-w-[1200px] px-4 py-24 text-center sm:px-8 sm:py-32">
       <motion.div style={{ rotate }} className="mx-auto mb-10 h-14 w-14">
-        <FlowerMark />
+        <BrandMark />
       </motion.div>
       <p className="font-display text-[clamp(1.9rem,4.4vw,3.8rem)] font-light leading-[1.15] tracking-tight">
         {words.map((w, i) => (
@@ -175,10 +175,10 @@ export function FinalCta() {
     <section className="mx-auto max-w-[1400px] px-4 sm:px-8">
       <div className="relative overflow-hidden rounded-[32px] bg-accent-soft/50 px-6 py-20 text-center sm:px-12 sm:py-28">
         <motion.div aria-hidden className="pointer-events-none absolute -left-16 -top-16 h-64 w-64 opacity-60" animate={{ rotate: hover ? 180 : 0 }} transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}>
-          <FlowerMark />
+          <BrandMark />
         </motion.div>
         <motion.div aria-hidden className="pointer-events-none absolute -bottom-20 -right-10 h-72 w-72 opacity-60" animate={{ rotate: hover ? -180 : 0 }} transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}>
-          <FlowerMark />
+          <BrandMark />
         </motion.div>
         <p className="relative text-xs uppercase tracking-[0.24em] text-primary">{BRAND.finalCta.eyebrow}</p>
         <h2 className="relative mx-auto mt-4 max-w-3xl font-display text-5xl leading-[0.95] tracking-tight sm:text-7xl">

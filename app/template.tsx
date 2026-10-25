@@ -1,9 +1,9 @@
 "use client";
 
 import { motion } from "motion/react";
-import { FlowerMark } from "@/components/FlowerMark";
+import { BrandMark } from "@/components/BrandMark";
 
-// Cortina com a flor a cada troca de página.
+// Cortina com a marca a cada troca de página.
 export default function Template({ children }: { children: React.ReactNode }) {
   return (
     <>
@@ -15,7 +15,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
         transition={{ duration: 0.8, delay: 0.15, ease: [0.76, 0, 0.24, 1] }}
       >
         <motion.div initial={{ rotate: 0, scale: 1 }} animate={{ rotate: 120, scale: 0.4, opacity: 0 }} transition={{ duration: 0.6 }}>
-          <FlowerMark className="h-16 w-16" />
+          <BrandMark className="h-16 w-16" />
         </motion.div>
       </motion.div>
       <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}>

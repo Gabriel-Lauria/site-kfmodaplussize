@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import { BRAND, FEATURES, PRODUCTS, STORES_CTA } from "@/config";
-import { FlowerMark } from "../FlowerMark";
+import { BrandMark } from "../BrandMark";
 import { Magnetic } from "../Magnetic";
 import { MirrorFrame } from "../MirrorFrame";
 import { Counter, SplitWords } from "../motion-utils";
@@ -47,7 +47,7 @@ export function Hero() {
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <div className="absolute -bottom-40 -left-40 h-[520px] w-[520px] rounded-full bg-accent/25 blur-[120px]" />
           <div className="absolute -right-20 -top-32 h-[420px] w-[420px] rounded-full bg-highlight/30 blur-[120px]" />
-          <FlowerMark mono="#ffffff08" className="absolute -left-32 top-1/3 h-[560px] w-[560px] animate-spin-slow" />
+          <BrandMark mono="#ffffff08" className="absolute -left-32 top-1/3 h-[560px] w-[560px] animate-spin-slow" />
         </div>
         {FEATURES.showPetalTrail && <PetalTrail />}
 
@@ -170,7 +170,7 @@ export function Hero() {
                     <textPath href="#badge-circle">{HERO.badge}</textPath>
                   </text>
                 </svg>
-                <FlowerMark className="absolute inset-[34%]" />
+                <BrandMark className="absolute inset-[34%]" />
               </motion.div>
             </motion.div>
 

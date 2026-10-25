@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { FlowerMark } from "@/components/FlowerMark";
+import { BrandMark } from "@/components/BrandMark";
 import { BRAND } from "@/config";
 
 export default function NotFound() {
   return (
     <section className="mx-auto flex min-h-[70vh] max-w-xl flex-col items-center justify-center px-4 py-24 text-center">
-      <FlowerMark bloom className="h-24 w-24" />
+      <BrandMark bloom className="h-24 w-24" />
       <p className="mt-8 text-xs uppercase tracking-[0.24em] text-accent">Erro 404</p>
       <h1 className="mt-3 font-display text-5xl leading-tight tracking-tight sm:text-6xl">
         {BRAND.notFound.title[0]} <em className="text-primary">{BRAND.notFound.title[1]}</em> {BRAND.notFound.title[2]}

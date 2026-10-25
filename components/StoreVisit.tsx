@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BRAND, STORES, mapsLink, storeWhatsapp } from "@/config";
-import { FlowerMark } from "./FlowerMark";
+import { BrandMark } from "./BrandMark";
 import { MirrorFrame } from "./MirrorFrame";
 import { Reveal, SplitWords } from "./motion-utils";
 import { ArrowRight, Pin, WhatsApp } from "./Icons";
@@ -17,7 +17,7 @@ export function StoreVisit({ variant = "home" }: { variant?: "home" | "page" }) 
   return (
     <section id="lojas" className="px-2 sm:px-4">
       <div className="relative overflow-hidden rounded-[28px] bg-primary-deep px-5 py-16 text-paper sm:rounded-[36px] sm:px-10 sm:py-20 lg:px-16">
-        <FlowerMark mono="#ffffff06" className="pointer-events-none absolute -right-40 -top-40 h-[640px] w-[640px] animate-spin-slow" />
+        <BrandMark mono="#ffffff06" className="pointer-events-none absolute -right-40 -top-40 h-[640px] w-[640px] animate-spin-slow" />
 
         <div className={`relative grid items-center gap-12 ${variant === "home" ? "lg:grid-cols-[1.1fr_0.9fr]" : ""}`}>
           <div>
@@ -42,7 +42,7 @@ export function StoreVisit({ variant = "home" }: { variant?: "home" | "page" }) 
                       {store.postalCode && <> · CEP {store.postalCode}</>}
                     </p>
                   </div>
-                  <FlowerMark bloom className="h-10 w-10 shrink-0" />
+                  <BrandMark bloom className="h-10 w-10 shrink-0" />
                 </div>
                 <div className="mt-5 flex flex-wrap gap-2">
                   <a href={mapsLink(store.mapsQuery)} target="_blank" rel="noopener noreferrer" className="flex flex-1 items-center justify-center gap-2 rounded-full bg-ink px-5 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-paper transition hover:bg-primary">

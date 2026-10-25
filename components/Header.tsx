@@ -6,7 +6,8 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useAnimationControls, useMotionValueEvent, useScroll } from "motion/react";
 import { BRAND, CONTACT, STORES_NAV, waLink } from "@/config";
 import { lockScroll } from "@/lib/lenis";
-import { FlowerMark } from "./FlowerMark";
+import { BrandMark } from "./BrandMark";
+import { Logo } from "./Logo";
 import { useSelection } from "./Selection";
 import { Heart, WhatsApp } from "./Icons";
 
@@ -57,7 +58,7 @@ export function Header() {
                 {[...ANNOUNCEMENTS, ...ANNOUNCEMENTS].map((a, i) => (
                   <span key={i} className="flex items-center gap-6 px-6">
                     {a}
-                    <FlowerMark mono="#E2589B" className="h-2.5 w-2.5" />
+                    <BrandMark mono="var(--color-accent)" className="h-2.5 w-2.5" />
                   </span>
                 ))}
               </div>
@@ -68,12 +69,7 @@ export function Header() {
         <nav className="border-b border-ink/5 bg-paper/80 backdrop-blur-xl">
           <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-4 sm:px-8">
             <Link href="/" className="group flex items-center gap-2.5" aria-label={`${BRAND.name}, início`}>
-              <motion.span whileHover={{ rotate: 120 }} transition={{ type: "spring", stiffness: 200, damping: 12 }} className="block">
-                <FlowerMark className="h-9 w-9" />
-              </motion.span>
-              <span className="font-display text-xl tracking-tight">
-                {BRAND.wordmark[0]} <em className="text-primary">{BRAND.wordmark[1]}</em>
-              </span>
+              <Logo spin accent markClassName="h-9 w-9" textClassName="font-display text-xl tracking-tight" />
             </Link>
 
             <ul className="hidden items-center gap-1 md:flex">
@@ -144,7 +140,7 @@ export function Header() {
             exit={{ clipPath: "circle(0% at 92% 6%)" }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           >
-            <FlowerMark mono="#ffffff10" className="pointer-events-none absolute -right-24 top-24 h-80 w-80" />
+            <BrandMark mono="#ffffff10" className="pointer-events-none absolute -right-24 top-24 h-80 w-80" />
             <ul className="space-y-2">
               {LINKS.map((l, i) => (
                 <motion.li key={l.href} initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2 + i * 0.07 }}>
