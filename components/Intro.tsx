@@ -30,7 +30,7 @@ export function Intro() {
     <AnimatePresence>
       {show && (
         <motion.div
-          className="intro fixed inset-0 z-[110] flex items-center justify-center overflow-hidden bg-wine-deep"
+          className="intro fixed inset-0 z-[110] flex items-center justify-center overflow-hidden bg-primary-deep"
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
         >
@@ -44,7 +44,7 @@ export function Intro() {
             </motion.div>
           </motion.div>
           <motion.p
-            className="absolute bottom-[38%] translate-y-24 font-display text-3xl italic text-blush"
+            className="absolute bottom-[38%] translate-y-24 font-display text-3xl italic text-accent-soft"
             initial={{ opacity: 0, y: 12 }}
             animate={dive ? { opacity: 0 } : { opacity: 1, y: 0 }}
             transition={{ delay: dive ? 0 : 0.6, duration: 0.5 }}

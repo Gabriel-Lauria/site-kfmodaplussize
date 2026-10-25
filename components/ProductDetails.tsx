@@ -48,7 +48,7 @@ export function ProductDetails({ product, onClose, headingLevel = "h2" }: { prod
         {product.colors.map((c) => (
           <button key={c.name} onClick={() => setColor(c.name)} className="relative h-9 w-9 rounded-full" aria-label={c.name} aria-pressed={color === c.name}>
             <span className="absolute inset-1 rounded-full shadow-[inset_0_0_0_1px_rgba(0,0,0,0.1)]" style={{ backgroundColor: c.hex }} />
-            {color === c.name && <motion.span layoutId={`color-ring-${product.slug}`} className="absolute inset-0 rounded-full border-2 border-wine" />}
+            {color === c.name && <motion.span layoutId={`color-ring-${product.slug}`} className="absolute inset-0 rounded-full border-2 border-primary" />}
           </button>
         ))}
       </div>
@@ -61,9 +61,9 @@ export function ProductDetails({ product, onClose, headingLevel = "h2" }: { prod
             key={s}
             onClick={() => setSize(s)}
             aria-pressed={size === s}
-            className={`relative min-w-12 rounded-full border px-4 py-2 text-sm transition ${size === s ? "border-wine text-paper" : "border-ink/15 hover:border-ink/40"}`}
+            className={`relative min-w-12 rounded-full border px-4 py-2 text-sm transition ${size === s ? "border-primary text-paper" : "border-ink/15 hover:border-ink/40"}`}
           >
-            {size === s && <motion.span layoutId={`size-pill-${product.slug}`} className="absolute inset-0 rounded-full bg-wine" transition={{ type: "spring", stiffness: 400, damping: 30 }} />}
+            {size === s && <motion.span layoutId={`size-pill-${product.slug}`} className="absolute inset-0 rounded-full bg-primary" transition={{ type: "spring", stiffness: 400, damping: 30 }} />}
             <span className="relative">{s}</span>
           </button>
         ))}
@@ -74,12 +74,12 @@ export function ProductDetails({ product, onClose, headingLevel = "h2" }: { prod
         href={waLink(message)}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex flex-1 items-center justify-center gap-2 rounded-full bg-wine px-6 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-paper transition hover:bg-wine-deep"
+        className="flex flex-1 items-center justify-center gap-2 rounded-full bg-primary px-6 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-paper transition hover:bg-primary-deep"
       >
         <WhatsApp /> {CTA.button}
       </a>
       <HeartButton product={product} className="relative h-[52px] w-[52px] shrink-0 border border-ink/15" />
-      <button onClick={share} className="relative grid h-[52px] w-[52px] shrink-0 place-items-center rounded-full border border-ink/15 transition hover:border-wine hover:text-wine" aria-label="Copiar link da peça">
+      <button onClick={share} className="relative grid h-[52px] w-[52px] shrink-0 place-items-center rounded-full border border-ink/15 transition hover:border-primary hover:text-primary" aria-label="Copiar link da peça">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden>
           <path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1" />
         </svg>
@@ -100,7 +100,7 @@ export function ProductDetails({ product, onClose, headingLevel = "h2" }: { prod
     </div>,
     <p key="note" className="mt-4 text-xs text-muted">
       {BRAND.product.note}
-      <Link href="/lojas" className="text-wine underline underline-offset-4">{BRAND.product.noteLink}</Link>.
+      <Link href="/lojas" className="text-primary underline underline-offset-4">{BRAND.product.noteLink}</Link>.
     </p>,
   ];
 

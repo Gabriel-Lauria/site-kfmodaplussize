@@ -14,7 +14,7 @@ export function Footer() {
   const rotate = useTransform(scrollYProgress, [0, 1], [-90, 0]);
 
   return (
-    <footer ref={ref} className="relative mt-24 overflow-hidden bg-wine-deep text-paper">
+    <footer ref={ref} className="relative mt-24 overflow-hidden bg-primary-deep text-paper">
       <div className="mx-auto grid max-w-[1400px] gap-12 px-4 pb-10 pt-20 sm:px-8 md:grid-cols-[1.4fr_1fr_1.4fr_1fr]">
         <div>
           <div className="flex items-center gap-3">
@@ -23,34 +23,34 @@ export function Footer() {
           </div>
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-paper/70">{BRAND.footer.about}</p>
           <div className="mt-6 flex gap-2">
-            <a href={CONTACT.instagram} target="_blank" rel="noopener noreferrer" className="rounded-full border border-paper/20 p-3 transition hover:border-rose hover:bg-rose" aria-label="Instagram">
+            <a href={CONTACT.instagram} target="_blank" rel="noopener noreferrer" className="rounded-full border border-paper/20 p-3 transition hover:border-accent hover:bg-accent" aria-label="Instagram">
               <Instagram />
             </a>
-            <a href={waLink(BRAND.messages.default)} target="_blank" rel="noopener noreferrer" className="rounded-full border border-paper/20 p-3 transition hover:border-rose hover:bg-rose" aria-label="WhatsApp">
+            <a href={waLink(BRAND.messages.default)} target="_blank" rel="noopener noreferrer" className="rounded-full border border-paper/20 p-3 transition hover:border-accent hover:bg-accent" aria-label="WhatsApp">
               <WhatsApp />
             </a>
           </div>
         </div>
 
         <div>
-          <h3 className="text-xs uppercase tracking-[0.2em] text-blush">Navegue</h3>
+          <h3 className="text-xs uppercase tracking-[0.2em] text-accent-soft">Navegue</h3>
           <ul className="mt-5 space-y-2.5 text-sm text-paper/80">
-            <li><Link className="transition hover:text-rose" href="/">Início</Link></li>
-            <li><Link className="transition hover:text-rose" href="/catalogo">Catálogo</Link></li>
-            <li><Link className="transition hover:text-rose" href="/lojas">{STORES_NAV}</Link></li>
+            <li><Link className="transition hover:text-accent" href="/">Início</Link></li>
+            <li><Link className="transition hover:text-accent" href="/catalogo">Catálogo</Link></li>
+            <li><Link className="transition hover:text-accent" href="/lojas">{STORES_NAV}</Link></li>
             {CONTACT.linktree && (
-              <li><a className="transition hover:text-rose" href={CONTACT.linktree} target="_blank" rel="noopener noreferrer">Links úteis</a></li>
+              <li><a className="transition hover:text-accent" href={CONTACT.linktree} target="_blank" rel="noopener noreferrer">Links úteis</a></li>
             )}
           </ul>
         </div>
 
         <div>
-          <h3 className="text-xs uppercase tracking-[0.2em] text-blush">{FEATURES.showStores ? "Lojas" : "Endereço"}</h3>
+          <h3 className="text-xs uppercase tracking-[0.2em] text-accent-soft">{FEATURES.showStores ? "Lojas" : "Endereço"}</h3>
           {FEATURES.showStores ? (
             <ul className="mt-5 grid grid-cols-2 gap-x-4 gap-y-2.5 text-sm text-paper/80">
               {STORES.map((s) => (
                 <li key={s.slug}>
-                  <Link className="transition hover:text-rose" href={`/lojas#${s.slug}`}>{s.name}</Link>
+                  <Link className="transition hover:text-accent" href={`/lojas#${s.slug}`}>{s.name}</Link>
                 </li>
               ))}
             </ul>
@@ -58,7 +58,7 @@ export function Footer() {
             <ul className="mt-5 space-y-2.5 text-sm text-paper/80">
               {STORES.map((s) => (
                 <li key={s.slug}>
-                  <Link className="transition hover:text-rose" href={`/lojas#${s.slug}`}>
+                  <Link className="transition hover:text-accent" href={`/lojas#${s.slug}`}>
                     {s.area}
                     <br />
                     {[s.city, s.state].filter(Boolean).join(" · ")}
@@ -71,7 +71,7 @@ export function Footer() {
         </div>
 
         <div>
-          <h3 className="text-xs uppercase tracking-[0.2em] text-blush">Contato</h3>
+          <h3 className="text-xs uppercase tracking-[0.2em] text-accent-soft">Contato</h3>
           <ul className="mt-5 space-y-2.5 text-sm text-paper/80">
             <li>WhatsApp {CONTACT.whatsappLabel}</li>
             <li>{CONTACT.instagramHandle}</li>
@@ -96,11 +96,11 @@ export function Footer() {
           <p>
             {BRAND.credit.label}{" "}
             {BRAND.credit.url ? (
-              <a href={BRAND.credit.url} target="_blank" rel="noopener noreferrer" className="text-blush hover:text-rose">
+              <a href={BRAND.credit.url} target="_blank" rel="noopener noreferrer" className="text-accent-soft hover:text-accent">
                 {BRAND.credit.name}
               </a>
             ) : (
-              <span className="text-blush">{BRAND.credit.name}</span>
+              <span className="text-accent-soft">{BRAND.credit.name}</span>
             )}
           </p>
         )}

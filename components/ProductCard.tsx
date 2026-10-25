@@ -23,7 +23,7 @@ export function HeartButton({ product, className }: { product: Product; classNam
         if (!liked) setBurst((b) => b + 1);
         toggle(product.slug, ref.current);
       }}
-      className={`grid h-10 w-10 place-items-center rounded-full bg-paper/90 backdrop-blur transition hover:bg-paper ${liked ? "text-rose" : "text-ink"} ${className ?? ""}`}
+      className={`grid h-10 w-10 place-items-center rounded-full bg-paper/90 backdrop-blur transition hover:bg-paper ${liked ? "text-accent" : "text-ink"} ${className ?? ""}`}
       aria-pressed={liked}
       aria-label={liked ? `Tirar ${product.name} da seleção` : `Salvar ${product.name} na seleção`}
     >
@@ -38,7 +38,7 @@ export function HeartButton({ product, className }: { product: Product; classNam
               return (
                 <motion.span
                   key={i}
-                  className="absolute left-1/2 top-1/2 h-2.5 w-1.5 rounded-full bg-rose"
+                  className="absolute left-1/2 top-1/2 h-2.5 w-1.5 rounded-full bg-accent"
                   style={{ rotate: (a * 180) / Math.PI + 90 }}
                   initial={{ x: -3, y: -5, opacity: 1, scale: 1 }}
                   animate={{ x: Math.cos(a) * 28 - 3, y: Math.sin(a) * 28 - 5, opacity: 0, scale: 0.4 }}
@@ -67,7 +67,7 @@ export function ProductCard({ product, onOpen, priority }: { product: Product; o
         )}
       </motion.div>
       {product.tag && (
-        <span className="absolute left-3 top-3 max-w-[calc(100%-4.75rem)] truncate rounded-full bg-paper/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-wine backdrop-blur">
+        <span className="absolute left-3 top-3 max-w-[calc(100%-4.75rem)] truncate rounded-full bg-paper/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-primary backdrop-blur">
           {product.tag}
         </span>
       )}
@@ -93,7 +93,7 @@ export function ProductCard({ product, onOpen, priority }: { product: Product; o
           href={waLink(CTA.quick(product.name))}
           target="_blank"
           rel="noopener noreferrer"
-          className="absolute inset-x-3 bottom-3 hidden items-center justify-center gap-2 rounded-full bg-ink/90 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-paper backdrop-blur transition-colors hover:bg-wine md:flex"
+          className="absolute inset-x-3 bottom-3 hidden items-center justify-center gap-2 rounded-full bg-ink/90 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-paper backdrop-blur transition-colors hover:bg-primary md:flex"
           initial={false}
           animate={{ opacity: hover ? 1 : 0, y: hover ? 0 : 12 }}
           transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}

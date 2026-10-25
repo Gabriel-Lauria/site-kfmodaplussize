@@ -6,17 +6,22 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { BRAND, CONTACT, FEATURES, SITE_URL, STORES, formatPhone, storageKey } from "@/config";
 
-const fraunces = Fraunces({
+// ==== FONTES ==============================================================
+// Troque as duas importações e chamadas abaixo para mudar a tipografia.
+// display = títulos (precisa de itálico); sans = textos e botões.
+// Mantenha as variáveis --font-brand-display e --font-brand-sans.
+const display = Fraunces({
   subsets: ["latin"],
-  variable: "--font-fraunces",
+  variable: "--font-brand-display",
   style: ["normal", "italic"],
   axes: ["SOFT", "opsz"],
 });
 
-const manrope = Manrope({
+const sans = Manrope({
   subsets: ["latin"],
-  variable: "--font-manrope",
+  variable: "--font-brand-sans",
 });
+// ==========================================================================
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -61,7 +66,7 @@ const INTRO_SCRIPT = FEATURES.showIntro
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR" className={`${fraunces.variable} ${manrope.variable}`} suppressHydrationWarning>
+    <html lang="pt-BR" className={`${display.variable} ${sans.variable}`} suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{

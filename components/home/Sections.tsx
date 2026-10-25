@@ -23,7 +23,7 @@ export function Perks() {
               <motion.span
                 variants={{ hover: { rotate: [0, -14, 10, 0], scale: 1.1 } }}
                 transition={{ duration: 0.5 }}
-                className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-blush/60 text-wine"
+                className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-accent-soft/60 text-primary"
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden>
                   <path d={p.icon} />
@@ -50,7 +50,7 @@ export function Categories() {
         <h2 className="font-display text-5xl leading-[0.95] tracking-tight sm:text-6xl">
           <SplitWords text={BRAND.categories.title[0]} />
           <br />
-          <SplitWords text={BRAND.categories.title[1]} delay={0.15} className="italic text-wine" />
+          <SplitWords text={BRAND.categories.title[1]} delay={0.15} className="italic text-primary" />
         </h2>
         <Reveal>
           <p className="max-w-xs text-sm text-muted">{BRAND.categories.hint}</p>
@@ -101,7 +101,7 @@ export function Featured() {
       <div className="mx-auto mb-10 flex max-w-[1400px] flex-wrap items-end justify-between gap-6 px-4 sm:px-8">
         <div>
           <Reveal>
-            <p className="text-xs uppercase tracking-[0.24em] text-rose">{BRAND.featured.eyebrow}</p>
+            <p className="text-xs uppercase tracking-[0.24em] text-accent">{BRAND.featured.eyebrow}</p>
           </Reveal>
           <h2 className="mt-3 font-display text-5xl tracking-tight sm:text-6xl">
             <SplitWords text={BRAND.featured.title} />
@@ -112,13 +112,13 @@ export function Featured() {
             <button
               key={dir}
               onClick={() => scroll(dir)}
-              className="grid h-12 w-12 place-items-center rounded-full border border-ink/15 transition hover:border-wine hover:bg-wine hover:text-paper"
+              className="grid h-12 w-12 place-items-center rounded-full border border-ink/15 transition hover:border-primary hover:bg-primary hover:text-paper"
               aria-label={dir < 0 ? "Anteriores" : "Próximas"}
             >
               <ArrowRight className={dir < 0 ? "rotate-180" : undefined} />
             </button>
           ))}
-          <Link href="/catalogo" className="ml-2 hidden items-center gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-wine sm:flex">
+          <Link href="/catalogo" className="ml-2 hidden items-center gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-primary sm:flex">
             Ver tudo <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
@@ -143,7 +143,7 @@ function Word({ word, progress, range }: { word: string; progress: MotionValue<n
   const opacity = useTransform(progress, range, [0.12, 1]);
   const highlight = BRAND.manifesto.highlight.some((h) => word.includes(h));
   return (
-    <motion.span style={{ opacity }} className={`mr-[0.25em] inline-block ${highlight ? "italic text-rose" : ""}`}>
+    <motion.span style={{ opacity }} className={`mr-[0.25em] inline-block ${highlight ? "italic text-accent" : ""}`}>
       {word}
     </motion.span>
   );
@@ -173,18 +173,18 @@ export function FinalCta() {
   const [hover, setHover] = useState(false);
   return (
     <section className="mx-auto max-w-[1400px] px-4 sm:px-8">
-      <div className="relative overflow-hidden rounded-[32px] bg-blush/50 px-6 py-20 text-center sm:px-12 sm:py-28">
+      <div className="relative overflow-hidden rounded-[32px] bg-accent-soft/50 px-6 py-20 text-center sm:px-12 sm:py-28">
         <motion.div aria-hidden className="pointer-events-none absolute -left-16 -top-16 h-64 w-64 opacity-60" animate={{ rotate: hover ? 180 : 0 }} transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}>
           <FlowerMark />
         </motion.div>
         <motion.div aria-hidden className="pointer-events-none absolute -bottom-20 -right-10 h-72 w-72 opacity-60" animate={{ rotate: hover ? -180 : 0 }} transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}>
           <FlowerMark />
         </motion.div>
-        <p className="relative text-xs uppercase tracking-[0.24em] text-wine">{BRAND.finalCta.eyebrow}</p>
+        <p className="relative text-xs uppercase tracking-[0.24em] text-primary">{BRAND.finalCta.eyebrow}</p>
         <h2 className="relative mx-auto mt-4 max-w-3xl font-display text-5xl leading-[0.95] tracking-tight sm:text-7xl">
           <SplitWords text={BRAND.finalCta.title[0]} />
           <br />
-          <SplitWords text={BRAND.finalCta.title[1]} delay={0.2} className="italic text-wine" />
+          <SplitWords text={BRAND.finalCta.title[1]} delay={0.2} className="italic text-primary" />
         </h2>
         <p className="relative mx-auto mt-6 max-w-md text-ink/70">{BRAND.finalCta.text}</p>
         <div className="relative mt-10 flex flex-wrap items-center justify-center gap-4" onPointerEnter={() => setHover(true)} onPointerLeave={() => setHover(false)}>
@@ -193,13 +193,13 @@ export function FinalCta() {
               href={waLink(BRAND.finalCta.message)}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 rounded-full bg-wine px-8 py-5 text-sm font-semibold uppercase tracking-[0.14em] text-paper shadow-[0_20px_50px_-15px_rgba(122,29,59,0.7)] transition hover:bg-wine-deep"
+              className="flex items-center gap-3 rounded-full bg-primary px-8 py-5 text-sm font-semibold uppercase tracking-[0.14em] text-paper shadow-[0_20px_50px_-15px_color-mix(in_srgb,var(--color-primary)_70%,transparent)] transition hover:bg-primary-deep"
             >
               <WhatsApp /> Chamar no WhatsApp
             </a>
           </Magnetic>
           <Magnetic>
-            <a href={CONTACT.instagram} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 rounded-full border border-ink/20 px-7 py-5 text-sm font-semibold uppercase tracking-[0.14em] transition hover:border-wine hover:text-wine">
+            <a href={CONTACT.instagram} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 rounded-full border border-ink/20 px-7 py-5 text-sm font-semibold uppercase tracking-[0.14em] transition hover:border-primary hover:text-primary">
               <Instagram /> {CONTACT.instagramHandle}
             </a>
           </Magnetic>

@@ -22,11 +22,11 @@ export default function LojasPage() {
     <>
       <section className="mx-auto grid max-w-[1400px] items-center gap-12 px-4 pb-16 pt-14 sm:px-8 sm:pt-20 lg:grid-cols-[1.2fr_0.8fr]">
         <div>
-          <p className="text-xs uppercase tracking-[0.24em] text-rose">{PAGE.eyebrow}</p>
+          <p className="text-xs uppercase tracking-[0.24em] text-accent">{PAGE.eyebrow}</p>
           <h1 className="mt-4 font-display text-[clamp(3.2rem,8vw,7rem)] font-light leading-[0.92] tracking-tight">
             <SplitWords text={PAGE.title[0]} onView={false} delay={0.4} />
             <br />
-            <SplitWords text={PAGE.title[1]} onView={false} delay={0.6} className="italic text-wine" />
+            <SplitWords text={PAGE.title[1]} onView={false} delay={0.6} className="italic text-primary" />
             <br />
             <SplitWords text={PAGE.title[2]} onView={false} delay={0.75} />
           </h1>
@@ -35,7 +35,7 @@ export default function LojasPage() {
               <div className="mt-10 grid max-w-lg grid-cols-3 gap-6 border-t border-ink/10 pt-8">
                 {stats.map((s) => (
                   <div key={s.label}>
-                    <p className="font-display text-4xl text-wine">{s.value}</p>
+                    <p className="font-display text-4xl text-primary">{s.value}</p>
                     <p className="text-xs uppercase tracking-[0.14em] text-muted">{s.label}</p>
                   </div>
                 ))}
@@ -57,10 +57,10 @@ export default function LojasPage() {
           <h2 className="font-display text-5xl leading-[0.95] tracking-tight">
             <SplitWords text={PAGE.faqTitle[0]} />
             <br />
-            <SplitWords text={PAGE.faqTitle[1]} delay={0.15} className="italic text-wine" />
+            <SplitWords text={PAGE.faqTitle[1]} delay={0.15} className="italic text-primary" />
           </h2>
           <Reveal>
-            <a href={waLink(PAGE.message)} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex rounded-full bg-wine px-7 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-paper transition hover:bg-wine-deep">
+            <a href={waLink(PAGE.message)} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex rounded-full bg-primary px-7 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-paper transition hover:bg-primary-deep">
               Tirar dúvida no WhatsApp
             </a>
           </Reveal>
@@ -71,7 +71,7 @@ export default function LojasPage() {
               <details className="group py-6">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-6 font-display text-2xl [&::-webkit-details-marker]:hidden">
                   {f.q}
-                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-ink/15 text-lg transition duration-500 group-open:rotate-45 group-open:bg-wine group-open:text-paper">+</span>
+                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-ink/15 text-lg transition duration-500 group-open:rotate-45 group-open:bg-primary group-open:text-paper">+</span>
                 </summary>
                 <p className="mt-4 max-w-xl text-ink/70">{f.a}</p>
               </details>

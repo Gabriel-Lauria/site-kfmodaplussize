@@ -37,7 +37,7 @@ export function Hero() {
   return (
     <section className="px-2 pt-2 sm:px-4 sm:pt-4">
       <div
-        className="relative overflow-hidden rounded-[28px] bg-wine-deep text-paper sm:rounded-[36px]"
+        className="relative overflow-hidden rounded-[28px] bg-primary-deep text-paper sm:rounded-[36px]"
         onPointerMove={(e) => {
           const r = e.currentTarget.getBoundingClientRect();
           mx.set((e.clientX - r.left) / r.width - 0.5);
@@ -45,8 +45,8 @@ export function Hero() {
         }}
       >
         <div aria-hidden className="pointer-events-none absolute inset-0">
-          <div className="absolute -bottom-40 -left-40 h-[520px] w-[520px] rounded-full bg-rose/25 blur-[120px]" />
-          <div className="absolute -right-20 -top-32 h-[420px] w-[420px] rounded-full bg-caramel/30 blur-[120px]" />
+          <div className="absolute -bottom-40 -left-40 h-[520px] w-[520px] rounded-full bg-accent/25 blur-[120px]" />
+          <div className="absolute -right-20 -top-32 h-[420px] w-[420px] rounded-full bg-highlight/30 blur-[120px]" />
           <FlowerMark mono="#ffffff08" className="absolute -left-32 top-1/3 h-[560px] w-[560px] animate-spin-slow" />
         </div>
         {FEATURES.showPetalTrail && <PetalTrail />}
@@ -54,12 +54,12 @@ export function Hero() {
         <div className="relative grid min-h-[calc(100svh-7.5rem)] lg:grid-cols-[1.1fr_0.9fr]">
           <div className="relative z-10 flex flex-col justify-center px-6 pb-10 pt-14 sm:px-12 lg:px-16 lg:py-16">
             <motion.p
-              className="flex items-center gap-3 text-[11px] uppercase tracking-[0.2em] text-blush sm:text-xs sm:tracking-[0.28em]"
+              className="flex items-center gap-3 text-[11px] uppercase tracking-[0.2em] text-accent-soft sm:text-xs sm:tracking-[0.28em]"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: d, duration: 0.8 }}
             >
-              <span className="hidden h-px w-10 bg-blush/60 sm:block" /> {HERO.eyebrow}
+              <span className="hidden h-px w-10 bg-accent-soft/60 sm:block" /> {HERO.eyebrow}
             </motion.p>
 
             <h1 className="mt-6 font-display text-[clamp(3.2rem,8.5vw,7.5rem)] font-light leading-[0.92] tracking-[-0.02em]">
@@ -67,7 +67,7 @@ export function Hero() {
               <br />
               <SplitWords text={HERO.title[1]} onView={false} delay={d + 0.3} />
               <br />
-              <SplitWords text={HERO.title[2]} onView={false} delay={d + 0.45} className="italic text-rose" />
+              <SplitWords text={HERO.title[2]} onView={false} delay={d + 0.45} className="italic text-accent" />
             </h1>
 
             <motion.p
@@ -88,17 +88,17 @@ export function Hero() {
               <Magnetic>
                 <Link
                   href="/catalogo"
-                  className="group flex items-center gap-3 rounded-full bg-paper py-4 pl-7 pr-5 text-sm font-semibold uppercase tracking-[0.14em] text-wine-deep transition hover:bg-blush"
+                  className="group flex items-center gap-3 rounded-full bg-paper py-4 pl-7 pr-5 text-sm font-semibold uppercase tracking-[0.14em] text-primary-deep transition hover:bg-accent-soft"
                 >
                   Ver catálogo
-                  <span className="grid h-8 w-8 place-items-center rounded-full bg-wine text-paper transition-transform duration-500 group-hover:-rotate-45">
+                  <span className="grid h-8 w-8 place-items-center rounded-full bg-primary text-paper transition-transform duration-500 group-hover:-rotate-45">
                     <ArrowRight className="h-4 w-4" />
                   </span>
                 </Link>
               </Magnetic>
               <Magnetic>
                 <Link href="/lojas" className="group flex items-center gap-3 px-2 py-3 text-sm font-medium">
-                  <span className="grid h-11 w-11 place-items-center rounded-full border border-paper/30 transition group-hover:border-rose group-hover:bg-rose">
+                  <span className="grid h-11 w-11 place-items-center rounded-full border border-paper/30 transition group-hover:border-accent group-hover:bg-accent">
                     <Pin className="h-4 w-4" />
                   </span>
                   {STORES_CTA}
@@ -116,7 +116,7 @@ export function Hero() {
                 {HERO.avatars.map((src, i) => (
                   <motion.div
                     key={src}
-                    className="relative h-11 w-11 overflow-hidden rounded-full border-2 border-wine-deep"
+                    className="relative h-11 w-11 overflow-hidden rounded-full border-2 border-primary-deep"
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ delay: d + 1.2 + i * 0.1, type: "spring", stiffness: 300, damping: 15 }}
@@ -129,7 +129,7 @@ export function Hero() {
                 <p className="font-display text-2xl leading-none">
                   <Counter to={BRAND.social.followers} decimals={1} suffix={BRAND.social.followersSuffix} />
                 </p>
-                <p className="mt-1 text-xs text-blush">{BRAND.social.followersLabel}</p>
+                <p className="mt-1 text-xs text-accent-soft">{BRAND.social.followersLabel}</p>
               </div>
             </motion.div>
           </div>
@@ -151,7 +151,7 @@ export function Hero() {
 
             <motion.p
               aria-hidden
-              className="pointer-events-none absolute bottom-28 right-8 z-10 font-display text-4xl italic text-paper [text-shadow:0_4px_30px_rgba(74,15,36,0.85)] sm:right-16 sm:text-6xl lg:bottom-40"
+              className="pointer-events-none absolute bottom-28 right-8 z-10 font-display text-4xl italic text-paper [text-shadow:0_4px_30px_color-mix(in_srgb,var(--color-primary-deep)_85%,transparent)] sm:right-16 sm:text-6xl lg:bottom-40"
               initial={{ opacity: 0, rotate: -14, y: 20 }}
               animate={{ opacity: 1, rotate: -8, y: 0 }}
               transition={{ delay: d + 1.1, duration: 1 }}
@@ -165,8 +165,8 @@ export function Hero() {
                   <defs>
                     <path id="badge-circle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" />
                   </defs>
-                  <circle cx="100" cy="100" r="98" fill="#FBF7F2" />
-                  <text fill="#4A0F24" fontSize="14.5" letterSpacing="3.2" fontWeight="600">
+                  <circle cx="100" cy="100" r="98" className="fill-paper" />
+                  <text className="fill-primary-deep" fontSize="14.5" letterSpacing="3.2" fontWeight="600">
                     <textPath href="#badge-circle">{HERO.badge}</textPath>
                   </text>
                 </svg>
@@ -185,8 +185,8 @@ export function Hero() {
                   <Image src={FEATURED.hoverImage ?? FEATURED.image} alt="" fill sizes="48px" className="object-cover" />
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.2em] text-blush">{HERO.featuredLabel}</p>
-                  <Link href={`/catalogo/${FEATURED.slug}`} className="font-display text-lg leading-tight hover:text-blush">
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-accent-soft">{HERO.featuredLabel}</p>
+                  <Link href={`/catalogo/${FEATURED.slug}`} className="font-display text-lg leading-tight hover:text-accent-soft">
                     {FEATURED.name}
                   </Link>
                 </div>

@@ -161,7 +161,7 @@ function SelectionDrawer() {
                           <p className="text-xs uppercase tracking-widest text-muted">{p.category}</p>
                           <p className="font-display text-lg leading-tight">{p.name}</p>
                         </div>
-                        <button onClick={() => toggle(p.slug)} className="rounded-full p-2 text-muted transition hover:bg-paper hover:text-wine" aria-label={`Remover ${p.name}`}>
+                        <button onClick={() => toggle(p.slug)} className="rounded-full p-2 text-muted transition hover:bg-paper hover:text-primary" aria-label={`Remover ${p.name}`}>
                           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6"><path d="M6 6l12 12M18 6L6 18" /></svg>
                         </button>
                       </motion.li>
@@ -178,7 +178,7 @@ function SelectionDrawer() {
                 rel="noopener noreferrer"
                 aria-disabled={!products.length}
                 className={`flex w-full items-center justify-center gap-2 rounded-full px-6 py-4 text-sm font-semibold uppercase tracking-[0.14em] transition ${
-                  products.length ? "bg-wine text-paper hover:bg-wine-deep" : "pointer-events-none bg-ink/10 text-muted"
+                  products.length ? "bg-primary text-paper hover:bg-primary-deep" : "pointer-events-none bg-ink/10 text-muted"
                 }`}
               >
                 {CTA.selectionButton}

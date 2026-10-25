@@ -51,9 +51,9 @@ export default async function ProductPage({ params }: Props) {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <nav aria-label="Caminho" className="mx-auto max-w-[1400px] px-4 pt-8 text-xs uppercase tracking-[0.16em] text-muted sm:px-8">
-        <Link href="/" className="hover:text-wine">Início</Link>
+        <Link href="/" className="hover:text-primary">Início</Link>
         <span className="mx-2">/</span>
-        <Link href={`/catalogo?categoria=${encodeURIComponent(product.category)}`} className="hover:text-wine">{product.category}</Link>
+        <Link href={`/catalogo?categoria=${encodeURIComponent(product.category)}`} className="hover:text-primary">{product.category}</Link>
         <span className="mx-2">/</span>
         <span className="text-ink">{product.name}</span>
       </nav>
@@ -80,7 +80,7 @@ export default async function ProductPage({ params }: Props) {
       <section className="mx-auto max-w-[1400px] px-4 sm:px-8">
         <Reveal>
           <h2 className="font-display text-4xl tracking-tight sm:text-5xl">
-            Combine <em className="text-wine">com</em>
+            Combine <em className="text-primary">com</em>
           </h2>
         </Reveal>
         <div className="mt-8 grid grid-cols-2 gap-x-3 gap-y-10 sm:gap-x-5 lg:grid-cols-4">

@@ -1,10 +1,9 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { themeColor } from "@/lib/theme";
 
 type Petal = { x: number; y: number; vx: number; vy: number; rot: number; vr: number; life: number; size: number; color: string };
-
-const COLORS = ["#F7B8D2", "#EE8DB8", "#E2589B", "#F9C9DC"];
 
 // Pétalas que caem do cursor dentro do elemento pai; um clique solta uma rajada.
 export function PetalTrail() {
@@ -18,6 +17,7 @@ export function PetalTrail() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    const COLORS = [1, 2, 3, 4].map((i) => themeColor(`particle-${i}`));
     const petals: Petal[] = [];
     let raf = 0;
     let last = 0;

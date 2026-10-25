@@ -50,7 +50,7 @@ export function Header() {
         animate={{ y: hidden && !menu ? "-100%" : "0%" }}
         transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="overflow-hidden bg-wine-deep py-2 text-[11px] uppercase tracking-[0.18em] text-blush">
+        <div className="overflow-hidden bg-primary-deep py-2 text-[11px] uppercase tracking-[0.18em] text-accent-soft">
           <div className="flex w-max animate-marquee">
             {[0, 1].map((k) => (
               <div key={k} className="flex shrink-0 items-center" aria-hidden={k === 1}>
@@ -72,7 +72,7 @@ export function Header() {
                 <FlowerMark className="h-9 w-9" />
               </motion.span>
               <span className="font-display text-xl tracking-tight">
-                {BRAND.wordmark[0]} <em className="text-wine">{BRAND.wordmark[1]}</em>
+                {BRAND.wordmark[0]} <em className="text-primary">{BRAND.wordmark[1]}</em>
               </span>
             </Link>
 
@@ -85,7 +85,7 @@ export function Header() {
                       {l.label}
                     </Link>
                     {active && (
-                      <motion.span layoutId="nav-pill" className="absolute inset-0 rounded-full bg-wine" transition={{ type: "spring", stiffness: 380, damping: 32 }} />
+                      <motion.span layoutId="nav-pill" className="absolute inset-0 rounded-full bg-primary" transition={{ type: "spring", stiffness: 380, damping: 32 }} />
                     )}
                   </li>
                 );
@@ -110,7 +110,7 @@ export function Header() {
                     >
                       <motion.span
                         animate={badge}
-                        className="flex h-5 min-w-5 items-center justify-center rounded-full bg-rose px-1 text-[10px] font-bold text-paper"
+                        className="flex h-5 min-w-5 items-center justify-center rounded-full bg-accent px-1 text-[10px] font-bold text-paper"
                       >
                         {items.length}
                       </motion.span>
@@ -122,7 +122,7 @@ export function Header() {
                 href={waLink(BRAND.messages.default)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-paper transition hover:bg-wine sm:flex"
+                className="hidden items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-paper transition hover:bg-primary sm:flex"
               >
                 <WhatsApp className="h-4 w-4" /> Fale com a gente
               </a>
@@ -138,7 +138,7 @@ export function Header() {
       <AnimatePresence>
         {menu && (
           <motion.div
-            className="fixed inset-0 z-[75] flex flex-col justify-end bg-wine-deep px-6 pb-12 pt-32 text-paper md:hidden"
+            className="fixed inset-0 z-[75] flex flex-col justify-end bg-primary-deep px-6 pb-12 pt-32 text-paper md:hidden"
             initial={{ clipPath: "circle(0% at 92% 6%)" }}
             animate={{ clipPath: "circle(150% at 92% 6%)" }}
             exit={{ clipPath: "circle(0% at 92% 6%)" }}
@@ -154,7 +154,7 @@ export function Header() {
                 </motion.li>
               ))}
             </ul>
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="mt-10 space-y-2 text-sm text-blush">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="mt-10 space-y-2 text-sm text-accent-soft">
               <a href={waLink(BRAND.messages.default)} className="block">WhatsApp {CONTACT.whatsappLabel}</a>
               <a href={CONTACT.instagram} className="block">Instagram {CONTACT.instagramHandle}</a>
             </motion.div>

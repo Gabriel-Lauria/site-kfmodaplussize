@@ -17,11 +17,11 @@ function MapShape({ item }: { item: MapItem }) {
     case "area":
       return <path d={item.d} fill="#ffffff0a" stroke="#ffffff26" strokeWidth="0.3" strokeDasharray="1 1" />;
     case "street":
-      return <path d={item.d} fill="none" stroke="#F6CFDF" strokeOpacity="0.45" strokeWidth="0.5" strokeDasharray="0.8 0.8" />;
+      return <path d={item.d} fill="none" className="stroke-accent-soft" strokeOpacity="0.45" strokeWidth="0.5" strokeDasharray="0.8 0.8" />;
     case "label":
       return <text x={item.x} y={item.y} fill="#ffffff55" fontSize={item.size} letterSpacing={item.spacing}>{item.text}</text>;
     case "street-label":
-      return <text x={item.x} y={item.y} fill="#F6CFDF99" fontSize={item.size} fontStyle="italic">{item.text}</text>;
+      return <text x={item.x} y={item.y} className="fill-accent-soft/60" fontSize={item.size} fontStyle="italic">{item.text}</text>;
   }
 }
 
@@ -39,16 +39,16 @@ export function StoresShowcase({ variant = "home" }: { variant?: "home" | "page"
 
   return (
     <section id="lojas" className="px-2 sm:px-4">
-      <div className="relative overflow-hidden rounded-[28px] bg-wine-deep px-5 py-16 text-paper sm:rounded-[36px] sm:px-10 sm:py-20 lg:px-16">
+      <div className="relative overflow-hidden rounded-[28px] bg-primary-deep px-5 py-16 text-paper sm:rounded-[36px] sm:px-10 sm:py-20 lg:px-16">
         <FlowerMark mono="#ffffff06" className="pointer-events-none absolute -right-40 -top-40 h-[640px] w-[640px] animate-spin-slow" />
 
         <div className="relative flex flex-wrap items-end justify-between gap-8">
           <div>
-            <p className="text-xs uppercase tracking-[0.24em] text-blush">{variant === "home" ? BRAND.stores.eyebrowHome : BRAND.stores.eyebrowPage}</p>
+            <p className="text-xs uppercase tracking-[0.24em] text-accent-soft">{variant === "home" ? BRAND.stores.eyebrowHome : BRAND.stores.eyebrowPage}</p>
             <h2 className="mt-4 font-display text-5xl leading-[0.95] tracking-tight sm:text-7xl">
               <SplitWords text={`${STORES.length} lojas.`} />
               <br />
-              <SplitWords text={BRAND.stores.titleAccent} delay={0.15} className="italic text-rose" />
+              <SplitWords text={BRAND.stores.titleAccent} delay={0.15} className="italic text-accent" />
             </h2>
           </div>
           <p className="max-w-sm text-paper/70">{BRAND.stores.text}</p>
@@ -61,7 +61,7 @@ export function StoresShowcase({ variant = "home" }: { variant?: "home" | "page"
               role="tab"
               aria-selected={filter === f}
               onClick={() => choose(f)}
-              className={`relative shrink-0 rounded-full border px-5 py-2.5 text-sm transition-colors ${filter === f ? "border-transparent text-wine-deep" : "border-paper/20 text-paper/80 hover:border-paper/50"}`}
+              className={`relative shrink-0 rounded-full border px-5 py-2.5 text-sm transition-colors ${filter === f ? "border-transparent text-primary-deep" : "border-paper/20 text-paper/80 hover:border-paper/50"}`}
             >
               {filter === f && <motion.span layoutId={`region-pill-${variant}`} className="absolute inset-0 rounded-full bg-paper" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
               <span className="relative">
@@ -95,12 +95,12 @@ export function StoresShowcase({ variant = "home" }: { variant?: "home" | "page"
                       className={`group relative flex w-full items-center gap-5 rounded-2xl px-4 py-4 text-left transition-colors ${on ? "bg-paper/10" : "hover:bg-paper/5"}`}
                       aria-pressed={on}
                     >
-                      <span className={`w-6 text-xs tabular-nums transition-colors ${on ? "text-rose" : "text-paper/40"}`}>{String(i + 1).padStart(2, "0")}</span>
+                      <span className={`w-6 text-xs tabular-nums transition-colors ${on ? "text-accent" : "text-paper/40"}`}>{String(i + 1).padStart(2, "0")}</span>
                       <span className="flex-1">
                         <span className="block font-display text-2xl leading-tight sm:text-[1.7rem]">{s.name}</span>
                         <span className="text-xs text-paper/55">{s.area}</span>
                       </span>
-                      <motion.span animate={{ x: on ? 0 : -8, opacity: on ? 1 : 0 }} className="text-rose">
+                      <motion.span animate={{ x: on ? 0 : -8, opacity: on ? 1 : 0 }} className="text-accent">
                         <ArrowRight />
                       </motion.span>
                     </button>
@@ -111,7 +111,7 @@ export function StoresShowcase({ variant = "home" }: { variant?: "home" | "page"
           </ol>
 
           <div className="lg:sticky lg:top-28 lg:self-start">
-            <div className="relative overflow-hidden rounded-[28px] bg-wine p-3 sm:p-4">
+            <div className="relative overflow-hidden rounded-[28px] bg-primary p-3 sm:p-4">
               <svg viewBox="0 0 100 80" className="w-full" role="img" aria-label={`Mapa ilustrativo das lojas ${BRAND.name}`}>
                 {STORE_MAP.map((item, i) => (
                   <MapShape key={i} item={item} />
@@ -131,11 +131,16 @@ export function StoresShowcase({ variant = "home" }: { variant?: "home" | "page"
                       style={{ transition: "opacity .4s" }}
                     >
                       {on && (
-                        <motion.circle r={1.6} fill="none" stroke="#E2589B" strokeWidth={0.4} initial={{ scale: 1, opacity: 1 }} animate={{ scale: 4, opacity: 0 }} transition={{ duration: 1.6, repeat: Infinity, ease: "easeOut" }} />
+                        <motion.circle r={1.6} fill="none" className="stroke-accent" strokeWidth={0.4} initial={{ scale: 1, opacity: 1 }} animate={{ scale: 4, opacity: 0 }} transition={{ duration: 1.6, repeat: Infinity, ease: "easeOut" }} />
                       )}
                       <circle r={3} fill="transparent" />
-                      <motion.circle r={1.4} animate={{ scale: on ? 1.5 : 1, fill: on ? "#E2589B" : "#F6CFDF" }} transition={{ type: "spring", stiffness: 300, damping: 15 }} />
-                      {on && <motion.circle r={0.6} fill="#4A0F24" initial={{ scale: 0 }} animate={{ scale: 1 }} />}
+                      <motion.circle
+                        r={1.4}
+                        className={`transition-[fill] duration-300 ${on ? "fill-accent" : "fill-accent-soft"}`}
+                        animate={{ scale: on ? 1.5 : 1 }}
+                        transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                      />
+                      {on && <motion.circle r={0.6} className="fill-primary-deep" initial={{ scale: 0 }} animate={{ scale: 1 }} />}
                     </g>
                   );
                 })}
@@ -152,7 +157,7 @@ export function StoresShowcase({ variant = "home" }: { variant?: "home" | "page"
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <p className="text-[11px] uppercase tracking-[0.2em] text-rose">{store.region}</p>
+                      <p className="text-[11px] uppercase tracking-[0.2em] text-accent">{store.region}</p>
                       <h3 className="mt-1 font-display text-3xl leading-tight">{store.name}</h3>
                       <p className="mt-1 flex items-center gap-1.5 text-sm text-muted">
                         <Pin className="h-4 w-4" /> {store.area} · {store.city}
@@ -161,10 +166,10 @@ export function StoresShowcase({ variant = "home" }: { variant?: "home" | "page"
                     <FlowerMark bloom className="h-10 w-10 shrink-0" />
                   </div>
                   <div className="mt-5 flex flex-wrap gap-2">
-                    <a href={mapsLink(store.mapsQuery)} target="_blank" rel="noopener noreferrer" className="flex flex-1 items-center justify-center gap-2 rounded-full bg-ink px-5 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-paper transition hover:bg-wine">
+                    <a href={mapsLink(store.mapsQuery)} target="_blank" rel="noopener noreferrer" className="flex flex-1 items-center justify-center gap-2 rounded-full bg-ink px-5 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-paper transition hover:bg-primary">
                       <Pin className="h-4 w-4" /> Como chegar
                     </a>
-                    <a href={storeWhatsapp(store)} target="_blank" rel="noopener noreferrer" className="flex flex-1 items-center justify-center gap-2 rounded-full border border-ink/15 px-5 py-3 text-xs font-semibold uppercase tracking-[0.12em] transition hover:border-wine hover:text-wine">
+                    <a href={storeWhatsapp(store)} target="_blank" rel="noopener noreferrer" className="flex flex-1 items-center justify-center gap-2 rounded-full border border-ink/15 px-5 py-3 text-xs font-semibold uppercase tracking-[0.12em] transition hover:border-primary hover:text-primary">
                       <WhatsApp className="h-4 w-4" /> Falar com a loja
                     </a>
                   </div>
@@ -177,7 +182,7 @@ export function StoresShowcase({ variant = "home" }: { variant?: "home" | "page"
 
         {variant === "home" && (
           <div className="relative mt-12 flex justify-center">
-            <Link href="/lojas" className="group flex items-center gap-3 rounded-full border border-paper/25 px-7 py-4 text-sm font-semibold uppercase tracking-[0.14em] transition hover:border-paper hover:bg-paper hover:text-wine-deep">
+            <Link href="/lojas" className="group flex items-center gap-3 rounded-full border border-paper/25 px-7 py-4 text-sm font-semibold uppercase tracking-[0.14em] transition hover:border-paper hover:bg-paper hover:text-primary-deep">
               Ver todas as lojas <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>

@@ -42,7 +42,7 @@ export function Catalog() {
       <section className="mx-auto max-w-[1400px] px-4 pb-10 pt-14 sm:px-8 sm:pt-20">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <p className="text-xs uppercase tracking-[0.24em] text-rose">Coleção atual</p>
+            <p className="text-xs uppercase tracking-[0.24em] text-accent">Coleção atual</p>
             <h1 className="mt-3 font-display text-[clamp(3.5rem,10vw,8rem)] font-light leading-[0.9] tracking-tight">
               <SplitWords text="Catálogo" onView={false} delay={0.4} />
             </h1>
@@ -62,12 +62,12 @@ export function Catalog() {
                 onClick={() => setParam("categoria", c === "Todas" ? null : c)}
                 className={`relative shrink-0 rounded-full px-4 py-2 text-sm transition-colors ${filter === c ? "text-paper" : "text-ink/70 hover:text-ink"}`}
               >
-                {filter === c && <motion.span layoutId="cat-pill" className="absolute inset-0 rounded-full bg-wine" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
+                {filter === c && <motion.span layoutId="cat-pill" className="absolute inset-0 rounded-full bg-primary" transition={{ type: "spring", stiffness: 380, damping: 32 }} />}
                 <span className="relative">{c}</span>
               </button>
             ))}
           </div>
-          <button onClick={() => setOpen(true)} className="hidden shrink-0 items-center gap-2 rounded-full border border-ink/10 px-4 py-2 text-sm transition hover:border-wine hover:text-wine sm:flex">
+          <button onClick={() => setOpen(true)} className="hidden shrink-0 items-center gap-2 rounded-full border border-ink/10 px-4 py-2 text-sm transition hover:border-primary hover:text-primary sm:flex">
             <Heart className="h-4 w-4" /> Minha seleção ({items.length})
           </button>
         </div>

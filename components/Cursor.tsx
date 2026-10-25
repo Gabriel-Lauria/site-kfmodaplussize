@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useMotionValue, useSpring } from "motion/react";
+import { themeColor } from "@/lib/theme";
 
 // Bolha que segue o mouse e vira etiqueta ("Ver", "Explorar"...) sobre elementos com data-cursor.
 export function Cursor() {
@@ -12,11 +13,13 @@ export function Cursor() {
   const y = useMotionValue(-100);
   const sx = useSpring(x, { stiffness: 500, damping: 40, mass: 0.6 });
   const sy = useSpring(y, { stiffness: 500, damping: 40, mass: 0.6 });
+  const [colors, setColors] = useState({ dot: "transparent", label: "transparent" });
 
   useEffect(() => {
     const mq = window.matchMedia("(pointer: fine)");
     setEnabled(mq.matches);
     if (!mq.matches) return;
+    setColors({ dot: themeColor("accent", 0.85), label: themeColor("primary", 0.92) });
 
     const move = (e: PointerEvent) => {
       x.set(e.clientX);
@@ -47,7 +50,7 @@ export function Cursor() {
         animate={{
           width: label ? 88 : 14,
           height: label ? 88 : 14,
-          backgroundColor: label ? "rgba(122,29,59,0.92)" : "rgba(226,88,155,0.85)",
+          backgroundColor: label ? colors.label : colors.dot,
           opacity: visible ? 1 : 0,
         }}
         transition={{ type: "spring", stiffness: 350, damping: 26 }}
