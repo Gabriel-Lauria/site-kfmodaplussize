@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { Catalog } from "@/components/Catalog";
+import { BRAND } from "@/config";
 
 export const metadata: Metadata = {
   title: "Catálogo",
-  description: "Vestidos, conjuntos, blusas, básicos e bolsas da Espaço Flor. Escolha suas peças e peça pelo WhatsApp.",
+  description: BRAND.catalog.metaDescription,
 };
 
 export default function CatalogoPage() {

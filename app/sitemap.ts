@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
-import { PRODUCTS } from "@/lib/data";
-import { SITE_URL } from "@/lib/site";
+import { PRODUCTS, SITE_URL } from "@/config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages = ["", "/catalogo", "/lojas"].map((path) => ({

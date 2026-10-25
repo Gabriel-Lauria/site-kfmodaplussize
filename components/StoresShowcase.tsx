@@ -3,12 +3,27 @@
 import { useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
-import { REGIONS, STORES, mapsLink, storeWhatsapp, type Region } from "@/lib/data";
+import { BRAND, REGIONS, STORES, STORE_MAP, mapsLink, storeWhatsapp, type MapItem, type Region } from "@/config";
 import { FlowerMark } from "./FlowerMark";
 import { SplitWords } from "./motion-utils";
 import { ArrowRight, Pin, WhatsApp } from "./Icons";
 
 type Filter = "Todas" | Region;
+
+function MapShape({ item }: { item: MapItem }) {
+  switch (item.kind) {
+    case "line":
+      return <path d={item.d} fill="none" stroke="#ffffff14" strokeWidth="0.6" />;
+    case "area":
+      return <path d={item.d} fill="#ffffff0a" stroke="#ffffff26" strokeWidth="0.3" strokeDasharray="1 1" />;
+    case "street":
+      return <path d={item.d} fill="none" stroke="#F6CFDF" strokeOpacity="0.45" strokeWidth="0.5" strokeDasharray="0.8 0.8" />;
+    case "label":
+      return <text x={item.x} y={item.y} fill="#ffffff55" fontSize={item.size} letterSpacing={item.spacing}>{item.text}</text>;
+    case "street-label":
+      return <text x={item.x} y={item.y} fill="#F6CFDF99" fontSize={item.size} fontStyle="italic">{item.text}</text>;
+  }
+}
 
 export function StoresShowcase({ variant = "home" }: { variant?: "home" | "page" }) {
   const [filter, setFilter] = useState<Filter>("Todas");
@@ -29,16 +44,14 @@ export function StoresShowcase({ variant = "home" }: { variant?: "home" | "page"
 
         <div className="relative flex flex-wrap items-end justify-between gap-8">
           <div>
-            <p className="text-xs uppercase tracking-[0.24em] text-blush">{variant === "home" ? "Visite a gente" : "Endereços"}</p>
+            <p className="text-xs uppercase tracking-[0.24em] text-blush">{variant === "home" ? BRAND.stores.eyebrowHome : BRAND.stores.eyebrowPage}</p>
             <h2 className="mt-4 font-display text-5xl leading-[0.95] tracking-tight sm:text-7xl">
-              <SplitWords text="10 lojas." />
+              <SplitWords text={`${STORES.length} lojas.`} />
               <br />
-              <SplitWords text="Uma só flor." delay={0.15} className="italic text-rose" />
+              <SplitWords text={BRAND.stores.titleAccent} delay={0.15} className="italic text-rose" />
             </h2>
           </div>
-          <p className="max-w-sm text-paper/70">
-            Do calçadão da Rua XV aos shoppings, e também em São José dos Pinhais. Escolha a loja mais perto e fale direto com a nossa equipe.
-          </p>
+          <p className="max-w-sm text-paper/70">{BRAND.stores.text}</p>
         </div>
 
         <div className="no-scrollbar relative -mx-5 mt-10 flex gap-2 overflow-x-auto px-5 sm:mx-0 sm:flex-wrap sm:px-0" role="tablist" aria-label="Filtrar lojas por região">
@@ -99,14 +112,10 @@ export function StoresShowcase({ variant = "home" }: { variant?: "home" | "page"
 
           <div className="lg:sticky lg:top-28 lg:self-start">
             <div className="relative overflow-hidden rounded-[28px] bg-wine p-3 sm:p-4">
-              <svg viewBox="0 0 100 80" className="w-full" role="img" aria-label="Mapa ilustrativo das lojas Espaço Flor">
-                <path d="M6 70 C26 58 46 74 66 64 S 92 58 99 46" fill="none" stroke="#ffffff14" strokeWidth="0.6" />
-                <path d="M14 30 C16 16 32 8 48 9 C64 8 80 14 84 26 C88 38 82 52 70 58 C58 66 40 66 28 62 C16 58 12 44 14 30 Z" fill="#ffffff0a" stroke="#ffffff26" strokeWidth="0.3" strokeDasharray="1 1" />
-                <path d="M72 58 C79 53 92 55 95 64 C97 72 90 78 80 77 C71 76 66 66 72 58 Z" fill="#ffffff0a" stroke="#ffffff26" strokeWidth="0.3" strokeDasharray="1 1" />
-                <text x="18" y="20" fill="#ffffff55" fontSize="2.4" letterSpacing="0.6">CURITIBA</text>
-                <text x="74" y="76" fill="#ffffff55" fontSize="2" letterSpacing="0.4">SÃO JOSÉ DOS PINHAIS</text>
-                <path d="M36 34.2 C42 32 50 30.6 57.5 29.6" fill="none" stroke="#F6CFDF" strokeOpacity="0.45" strokeWidth="0.5" strokeDasharray="0.8 0.8" />
-                <text x="35" y="28.2" fill="#F6CFDF99" fontSize="1.9" fontStyle="italic">Rua XV</text>
+              <svg viewBox="0 0 100 80" className="w-full" role="img" aria-label={`Mapa ilustrativo das lojas ${BRAND.name}`}>
+                {STORE_MAP.map((item, i) => (
+                  <MapShape key={i} item={item} />
+                ))}
 
                 {STORES.map((s) => {
                   const on = s.slug === active;

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
-import { waLink, type Product } from "@/lib/data";
+import { BRAND, CTA, waLink, type Product } from "@/config";
 import { HeartButton } from "./ProductCard";
 import { WhatsApp } from "./Icons";
 
@@ -14,13 +14,13 @@ export function ProductDetails({ product, onClose, headingLevel = "h2" }: { prod
   const [copied, setCopied] = useState(false);
   const Heading = headingLevel;
 
-  const message = `Olá! Vim pelo site e quero: ${product.name} · cor ${color}${size ? ` · tamanho ${size}` : ""}. Tem disponível?`;
+  const message = CTA.detail(product.name, color, size);
 
   const share = async () => {
     const url = `${window.location.origin}/catalogo/${product.slug}`;
     try {
       if (navigator.share && window.matchMedia("(pointer: coarse)").matches) {
-        await navigator.share({ title: `${product.name} · Espaço Flor`, url });
+        await navigator.share({ title: `${product.name} · ${BRAND.name}`, url });
         return;
       }
       await navigator.clipboard.writeText(url);
@@ -76,7 +76,7 @@ export function ProductDetails({ product, onClose, headingLevel = "h2" }: { prod
         rel="noopener noreferrer"
         className="flex flex-1 items-center justify-center gap-2 rounded-full bg-wine px-6 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-paper transition hover:bg-wine-deep"
       >
-        <WhatsApp /> Pedir pelo WhatsApp
+        <WhatsApp /> {CTA.button}
       </a>
       <HeartButton product={product} className="relative h-[52px] w-[52px] shrink-0 border border-ink/15" />
       <button onClick={share} className="relative grid h-[52px] w-[52px] shrink-0 place-items-center rounded-full border border-ink/15 transition hover:border-wine hover:text-wine" aria-label="Copiar link da peça">
@@ -92,15 +92,15 @@ export function ProductDetails({ product, onClose, headingLevel = "h2" }: { prod
               className="absolute -top-10 right-0 whitespace-nowrap rounded-full bg-ink px-3 py-1.5 text-xs text-paper"
               role="status"
             >
-              Link copiado ✿
+              Link copiado {BRAND.ornament}
             </motion.span>
           )}
         </AnimatePresence>
       </button>
     </div>,
     <p key="note" className="mt-4 text-xs text-muted">
-      Disponível nas lojas físicas. Confirme estoque pelo WhatsApp ou{" "}
-      <Link href="/lojas" className="text-wine underline underline-offset-4">encontre a loja mais perto</Link>.
+      {BRAND.product.note}
+      <Link href="/lojas" className="text-wine underline underline-offset-4">{BRAND.product.noteLink}</Link>.
     </p>,
   ];
 

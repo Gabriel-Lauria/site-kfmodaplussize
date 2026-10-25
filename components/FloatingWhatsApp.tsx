@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
-import { waLink } from "@/lib/data";
+import { BRAND, waLink } from "@/config";
 import { WhatsApp } from "./Icons";
 
 // Aparece depois da primeira dobra. A dica "Posso ajudar?" surge uma vez e some sozinha.
@@ -44,12 +44,12 @@ export function FloatingWhatsApp() {
                 className="rounded-full bg-paper px-4 py-2 text-sm shadow-lg"
                 role="status"
               >
-                Posso te ajudar a escolher? ✿
+                {BRAND.floatingHint}
               </motion.span>
             )}
           </AnimatePresence>
           <motion.a
-            href={waLink("Olá! Vim pelo site da Espaço Flor e quero ajuda.")}
+            href={waLink(BRAND.messages.help)}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Conversar no WhatsApp"

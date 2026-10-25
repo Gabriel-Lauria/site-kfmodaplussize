@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { type Product } from "@/lib/data";
+import { type Product } from "@/config";
 import { lockScroll } from "@/lib/lenis";
 import { ProductDetails } from "./ProductDetails";
 import { ArrowRight } from "./Icons";

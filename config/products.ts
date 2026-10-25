@@ -1,20 +1,4 @@
-export const CONTACT = {
-  whatsapp: "5541996817936",
-  whatsappLabel: "(41) 99681-7936",
-  instagram: "https://www.instagram.com/mundoespacoflor/",
-  instagramHandle: "@mundoespacoflor",
-  linktree: "https://linktr.ee/espacoflormundo",
-  founder: "@anapaulathomazi",
-  founderUrl: "https://www.instagram.com/anapaulathomazi/",
-};
-
-export function waLink(message: string) {
-  return `https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(message)}`;
-}
-
-export function mapsLink(query: string) {
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
-}
+import { FEATURES } from "./features";
 
 export const CATEGORIES = ["Vestidos", "Conjuntos", "Blusas", "Básicos", "Bolsas"] as const;
 export type Category = (typeof CATEGORIES)[number];
@@ -33,7 +17,17 @@ export type Product = {
   description: string;
 };
 
-const GRADE = ["P", "M", "G", "GG"];
+// Grades prontas. A usada por padrão é escolhida em features.ts (FEATURES.grade).
+export const SIZE_PRESETS = {
+  "P-GG": ["P", "M", "G", "GG"],
+  "PP-GG": ["PP", "P", "M", "G", "GG"],
+  "G1-G5": ["G1", "G2", "G3", "G4", "G5"],
+  "42-54": ["42", "44", "46", "48", "50", "52", "54"],
+  "36-46": ["36", "38", "40", "42", "44", "46"],
+} as const satisfies Record<string, readonly string[]>;
+export type SizePreset = keyof typeof SIZE_PRESETS;
+
+const GRADE = [...SIZE_PRESETS[FEATURES.grade]];
 
 export const PRODUCTS: Product[] = [
   {
@@ -179,34 +173,20 @@ export const PRODUCTS: Product[] = [
   },
 ];
 
-export const REGIONS = ["Rua XV", "Centro", "Shoppings", "Bairros", "São José dos Pinhais"] as const;
-export type Region = (typeof REGIONS)[number];
-
-export type Store = {
-  slug: string;
-  name: string;
-  region: Region;
-  // TODO: substituir pela rua e número exatos de cada loja.
-  area: string;
-  city: "Curitiba" | "São José dos Pinhais";
-  mapsQuery: string;
-  // posição no mapa ilustrativo (0–100 x 0–80)
-  pin: { x: number; y: number };
-};
-
-export const STORES: Store[] = [
-  { slug: "rua-xv-palacio", name: "Rua XV · Palácio", region: "Rua XV", area: "Rua XV de Novembro, Centro", city: "Curitiba", mapsQuery: "Espaço Flor Rua XV de Novembro Palácio Curitiba", pin: { x: 39, y: 33 } },
-  { slug: "rua-xv-marechal", name: "Rua XV · Marechal", region: "Rua XV", area: "Rua XV de Novembro, Centro", city: "Curitiba", mapsQuery: "Espaço Flor Rua XV de Novembro Marechal Curitiba", pin: { x: 44, y: 31.5 } },
-  { slug: "rua-xv-chafariz", name: "Rua XV · Chafariz", region: "Rua XV", area: "Rua XV de Novembro, Centro", city: "Curitiba", mapsQuery: "Espaço Flor Rua XV de Novembro Chafariz Curitiba", pin: { x: 49, y: 30.5 } },
-  { slug: "rua-xv-federal", name: "Rua XV · Federal", region: "Rua XV", area: "Rua XV de Novembro, Centro", city: "Curitiba", mapsQuery: "Espaço Flor Rua XV de Novembro Federal Curitiba", pin: { x: 54, y: 30 } },
-  { slug: "joao-negrao", name: "Rua João Negrão", region: "Centro", area: "Rua João Negrão, Centro", city: "Curitiba", mapsQuery: "Espaço Flor Rua João Negrão Curitiba", pin: { x: 52, y: 38 } },
-  { slug: "estacao", name: "Shopping Estação", region: "Shoppings", area: "Shopping Estação, Centro", city: "Curitiba", mapsQuery: "Espaço Flor Shopping Estação Curitiba", pin: { x: 45, y: 42 } },
-  { slug: "palladium", name: "Shopping Palladium", region: "Shoppings", area: "Shopping Palladium, Portão", city: "Curitiba", mapsQuery: "Espaço Flor Shopping Palladium Curitiba", pin: { x: 27, y: 50 } },
-  { slug: "jockey-plaza", name: "Jockey Plaza", region: "Shoppings", area: "Jockey Plaza Shopping, Tarumã", city: "Curitiba", mapsQuery: "Espaço Flor Jockey Plaza Shopping Curitiba", pin: { x: 70, y: 24 } },
-  { slug: "jardim-das-americas", name: "Jardim das Américas", region: "Bairros", area: "Jardim das Américas", city: "Curitiba", mapsQuery: "Espaço Flor Jardim das Américas Curitiba", pin: { x: 67, y: 49 } },
-  { slug: "sao-jose", name: "São José", region: "São José dos Pinhais", area: "Centro de São José dos Pinhais", city: "São José dos Pinhais", mapsQuery: "Espaço Flor São José dos Pinhais", pin: { x: 82, y: 63 } },
+// Os 4 cards "Escolha por onde começar" da home (foto + foto do hover).
+export const HOME_CATEGORIES: { name: Category; image: string; hover: string }[] = [
+  { name: "Vestidos", image: "/images/vestido-plissado.png", hover: "/images/vestido-boho.png" },
+  { name: "Conjuntos", image: "/images/conjunto-azul.png", hover: "/images/tule-noir.png" },
+  { name: "Básicos", image: "/images/regatas-modelo.png", hover: "/images/regatas-cores.png" },
+  { name: "Bolsas", image: "/images/bolsa-petroleo.png", hover: "/images/bolsa-nude.png" },
 ];
 
-export function storeWhatsapp(store: Store) {
-  return waLink(`Olá! Vim pelo site e quero falar com a loja ${store.name} da Espaço Flor.`);
-}
+// Peças da seção "provador" (rolagem horizontal), na ordem em que aparecem.
+export const LOOKS = [
+  "conjunto-tule-noir",
+  "vestido-tule-cacau",
+  "vestido-boho-esmeralda",
+  "vestido-plissado-floral",
+  "blusa-assimetrica-floral",
+  "conjunto-azul-lenco",
+];

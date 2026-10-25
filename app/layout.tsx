@@ -4,8 +4,7 @@ import "./globals.css";
 import { Providers } from "@/components/Providers";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { CONTACT } from "@/lib/data";
-import { SITE_URL } from "@/lib/site";
+import { BRAND, CONTACT, FEATURES, SITE_URL, STORES, formatPhone, storageKey } from "@/config";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -22,15 +21,14 @@ const manrope = Manrope({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Espaço Flor | Moda Feminina em Curitiba e SJP",
-    template: "%s | Espaço Flor",
+    default: BRAND.seo.title,
+    template: `%s | ${BRAND.name}`,
   },
-  description:
-    "Moda feminina com 10 lojas em Curitiba e São José dos Pinhais. Vestidos, conjuntos, básicos e bolsas. Veja o catálogo e compre pelo WhatsApp.",
+  description: BRAND.seo.description,
   openGraph: {
-    title: "Espaço Flor | Moda Feminina",
-    description: "10 lojas em Curitiba e SJP. Veja o catálogo e encontre a loja mais perto de você.",
-    images: ["/images/vestido-caramelo.png"],
+    title: BRAND.seo.ogTitle,
+    description: BRAND.seo.ogDescription,
+    images: [BRAND.seo.ogImage],
     locale: "pt_BR",
     type: "website",
   },
@@ -39,12 +37,27 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ClothingStore",
-  name: "Espaço Flor",
-  description: "Moda feminina com 10 lojas em Curitiba e São José dos Pinhais.",
-  telephone: "+55 41 99681-7936",
-  sameAs: [CONTACT.instagram, CONTACT.linktree],
-  areaServed: ["Curitiba", "São José dos Pinhais"],
+  name: BRAND.name,
+  description: BRAND.seo.schemaDescription,
+  telephone: formatPhone(CONTACT.whatsapp),
+  sameAs: [CONTACT.instagram, CONTACT.linktree].filter(Boolean),
+  areaServed: BRAND.seo.areaServed,
+  ...(STORES.length === 1 && {
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: STORES[0].area,
+      addressLocality: STORES[0].city,
+      addressRegion: STORES[0].state,
+      postalCode: STORES[0].postalCode,
+      addressCountry: "BR",
+    },
+  }),
 };
+
+// Sem a intro, o hero já começa sem esperar por ela.
+const INTRO_SCRIPT = FEATURES.showIntro
+  ? `try{if(sessionStorage.getItem('${storageKey("intro")}'))document.documentElement.classList.add('intro-done')}catch(e){}`
+  : `document.documentElement.classList.add('intro-done')`;
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
@@ -52,7 +65,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{if(sessionStorage.getItem('ef-intro'))document.documentElement.classList.add('intro-done')}catch(e){}`,
+            __html: INTRO_SCRIPT,
           }}
         />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />

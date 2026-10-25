@@ -3,7 +3,7 @@
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
-import { PRODUCTS, waLink, type Product } from "@/lib/data";
+import { BRAND, CTA, PRODUCTS, storageKey, waLink, type Product } from "@/config";
 import { lockScroll } from "@/lib/lenis";
 
 type Flight = { id: number; image: string; from: DOMRect; to: DOMRect };
@@ -25,7 +25,7 @@ export function useSelection() {
   return ctx;
 }
 
-const KEY = "ef-selecao";
+const KEY = storageKey("selecao");
 
 export function SelectionProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<string[]>([]);
@@ -103,10 +103,7 @@ function SelectionDrawer() {
     return () => window.removeEventListener("keydown", onKey);
   }, [setOpen]);
 
-  const message =
-    "Olá! Vim pelo site da Espaço Flor e separei estas peças:\n" +
-    products.map((p) => `• ${p.name}`).join("\n") +
-    "\nQual loja tem disponível?";
+  const message = CTA.selection(products.map((p) => p.name));
 
   return (
     <AnimatePresence>
@@ -184,9 +181,9 @@ function SelectionDrawer() {
                   products.length ? "bg-wine text-paper hover:bg-wine-deep" : "pointer-events-none bg-ink/10 text-muted"
                 }`}
               >
-                Enviar seleção no WhatsApp
+                {CTA.selectionButton}
               </a>
-              <p className="mt-3 text-center text-xs text-muted">A gente confirma tamanho, cor e a loja mais perto de você.</p>
+              <p className="mt-3 text-center text-xs text-muted">{BRAND.selection.footer}</p>
             </div>
           </motion.aside>
         </>

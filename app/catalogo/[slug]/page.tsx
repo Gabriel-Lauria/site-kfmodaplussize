@@ -6,7 +6,7 @@ import { MirrorFrame } from "@/components/MirrorFrame";
 import { ProductCard } from "@/components/ProductCard";
 import { ProductDetails } from "@/components/ProductDetails";
 import { Reveal } from "@/components/motion-utils";
-import { PRODUCTS } from "@/lib/data";
+import { BRAND, PRODUCTS } from "@/config";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: product.name,
     description: product.description,
     alternates: { canonical: `/catalogo/${product.slug}` },
-    openGraph: { title: `${product.name} · Espaço Flor`, description: product.description, images: [product.image] },
+    openGraph: { title: `${product.name} · ${BRAND.name}`, description: product.description, images: [product.image] },
   };
 }
 
@@ -43,7 +43,7 @@ export default async function ProductPage({ params }: Props) {
     description: product.description,
     image: product.image,
     category: product.category,
-    brand: { "@type": "Brand", name: "Espaço Flor" },
+    brand: { "@type": "Brand", name: BRAND.name },
     color: product.colors.map((c) => c.name).join(", "),
   };
 

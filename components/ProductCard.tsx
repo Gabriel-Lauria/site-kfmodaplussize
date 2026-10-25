@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
-import { waLink, type Product } from "@/lib/data";
+import { CTA, waLink, type Product } from "@/config";
 import { useSelection } from "./Selection";
 import { Heart, WhatsApp } from "./Icons";
 
@@ -90,7 +90,7 @@ export function ProductCard({ product, onOpen, priority }: { product: Product; o
         <HeartButton product={product} className="absolute right-3 top-3" />
 
         <motion.a
-          href={waLink(`Olá! Vim pelo site e quero a peça: ${product.name}. Tem disponível?`)}
+          href={waLink(CTA.quick(product.name))}
           target="_blank"
           rel="noopener noreferrer"
           className="absolute inset-x-3 bottom-3 hidden items-center justify-center gap-2 rounded-full bg-ink/90 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-paper backdrop-blur transition-colors hover:bg-wine md:flex"
@@ -98,7 +98,7 @@ export function ProductCard({ product, onOpen, priority }: { product: Product; o
           animate={{ opacity: hover ? 1 : 0, y: hover ? 0 : 12 }}
           transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
         >
-          <WhatsApp className="h-4 w-4" /> Quero essa
+          <WhatsApp className="h-4 w-4" /> {CTA.card}
         </motion.a>
       </div>
 

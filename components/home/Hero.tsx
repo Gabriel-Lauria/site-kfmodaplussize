@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
+import { BRAND, FEATURES, PRODUCTS, STORES_CTA } from "@/config";
 import { FlowerMark } from "../FlowerMark";
 import { Magnetic } from "../Magnetic";
 import { MirrorFrame } from "../MirrorFrame";
@@ -11,7 +12,8 @@ import { Counter, SplitWords } from "../motion-utils";
 import { ArrowRight, Pin } from "../Icons";
 import { PetalTrail } from "./PetalTrail";
 
-const AVATARS = ["/images/tule-noir.png", "/images/vestido-boho.png", "/images/blusa-assimetrica.png"];
+const HERO = BRAND.hero;
+const FEATURED = PRODUCTS.find((p) => p.slug === HERO.featuredSlug);
 
 function useStartDelay() {
   const [delay] = useState(() =>
@@ -47,7 +49,7 @@ export function Hero() {
           <div className="absolute -right-20 -top-32 h-[420px] w-[420px] rounded-full bg-caramel/30 blur-[120px]" />
           <FlowerMark mono="#ffffff08" className="absolute -left-32 top-1/3 h-[560px] w-[560px] animate-spin-slow" />
         </div>
-        <PetalTrail />
+        {FEATURES.showPetalTrail && <PetalTrail />}
 
         <div className="relative grid min-h-[calc(100svh-7.5rem)] lg:grid-cols-[1.1fr_0.9fr]">
           <div className="relative z-10 flex flex-col justify-center px-6 pb-10 pt-14 sm:px-12 lg:px-16 lg:py-16">
@@ -57,15 +59,15 @@ export function Hero() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: d, duration: 0.8 }}
             >
-              <span className="hidden h-px w-10 bg-blush/60 sm:block" /> Nova estação · Curitiba e SJP
+              <span className="hidden h-px w-10 bg-blush/60 sm:block" /> {HERO.eyebrow}
             </motion.p>
 
             <h1 className="mt-6 font-display text-[clamp(3.2rem,8.5vw,7.5rem)] font-light leading-[0.92] tracking-[-0.02em]">
-              <SplitWords text="Vista o que" onView={false} delay={d + 0.1} />
+              <SplitWords text={HERO.title[0]} onView={false} delay={d + 0.1} />
               <br />
-              <SplitWords text="te faz" onView={false} delay={d + 0.3} />
+              <SplitWords text={HERO.title[1]} onView={false} delay={d + 0.3} />
               <br />
-              <SplitWords text="florescer." onView={false} delay={d + 0.45} className="italic text-rose" />
+              <SplitWords text={HERO.title[2]} onView={false} delay={d + 0.45} className="italic text-rose" />
             </h1>
 
             <motion.p
@@ -74,7 +76,7 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: d + 0.8, duration: 0.8 }}
             >
-              Vestidos, conjuntos, básicos e bolsas escolhidos a dedo. Dez lojas em Curitiba e São José dos Pinhais esperando por você.
+              {HERO.text}
             </motion.p>
 
             <motion.div
@@ -99,7 +101,7 @@ export function Hero() {
                   <span className="grid h-11 w-11 place-items-center rounded-full border border-paper/30 transition group-hover:border-rose group-hover:bg-rose">
                     <Pin className="h-4 w-4" />
                   </span>
-                  Encontrar uma loja
+                  {STORES_CTA}
                 </Link>
               </Magnetic>
             </motion.div>
@@ -111,7 +113,7 @@ export function Hero() {
               transition={{ delay: d + 1.15, duration: 0.8 }}
             >
               <div className="flex -space-x-3">
-                {AVATARS.map((src, i) => (
+                {HERO.avatars.map((src, i) => (
                   <motion.div
                     key={src}
                     className="relative h-11 w-11 overflow-hidden rounded-full border-2 border-wine-deep"
@@ -125,9 +127,9 @@ export function Hero() {
               </div>
               <div>
                 <p className="font-display text-2xl leading-none">
-                  <Counter to={57.6} decimals={1} suffix=" mil" />
+                  <Counter to={BRAND.social.followers} decimals={1} suffix={BRAND.social.followersSuffix} />
                 </p>
-                <p className="mt-1 text-xs text-blush">seguidoras no Instagram</p>
+                <p className="mt-1 text-xs text-blush">{BRAND.social.followersLabel}</p>
               </div>
             </motion.div>
           </div>
@@ -142,7 +144,7 @@ export function Hero() {
             >
               <MirrorFrame className="h-full w-full">
                 <motion.div className="absolute -inset-8" style={{ x: imgX, y: imgY }}>
-                  <Image src="/images/vestido-caramelo.png" alt="Modelo com vestido longo caramelo no centro de Curitiba" fill priority sizes="(min-width:1024px) 45vw, 100vw" className="object-cover object-[50%_20%]" />
+                  <Image src={HERO.image} alt={HERO.imageAlt} fill priority sizes="(min-width:1024px) 45vw, 100vw" className="object-cover object-[50%_20%]" />
                 </motion.div>
               </MirrorFrame>
             </motion.div>
@@ -154,7 +156,7 @@ export function Hero() {
               animate={{ opacity: 1, rotate: -8, y: 0 }}
               transition={{ delay: d + 1.1, duration: 1 }}
             >
-              do seu jeito
+              {HERO.script}
             </motion.p>
 
             <motion.div className="absolute -left-2 top-1/3 z-10 hidden lg:block" style={{ x: badgeX }}>
@@ -165,29 +167,31 @@ export function Hero() {
                   </defs>
                   <circle cx="100" cy="100" r="98" fill="#FBF7F2" />
                   <text fill="#4A0F24" fontSize="14.5" letterSpacing="3.2" fontWeight="600">
-                    <textPath href="#badge-circle">ESPAÇO FLOR • 10 LOJAS • CURITIBA E SJP •</textPath>
+                    <textPath href="#badge-circle">{HERO.badge}</textPath>
                   </text>
                 </svg>
                 <FlowerMark className="absolute inset-[34%]" />
               </motion.div>
             </motion.div>
 
-            <motion.div
-              className="absolute bottom-6 left-10 z-10 flex items-center gap-3 rounded-2xl bg-paper/15 p-2.5 pr-5 backdrop-blur-xl sm:left-16 lg:bottom-16 lg:left-2"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: d + 1.3, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <div className="relative h-14 w-12 overflow-hidden rounded-xl">
-                <Image src="/images/vestidos-cabide.png" alt="" fill sizes="48px" className="object-cover" />
-              </div>
-              <div>
-                <p className="text-[10px] uppercase tracking-[0.2em] text-blush">Look da semana</p>
-                <Link href="/catalogo/vestido-longo-caramelo" className="font-display text-lg leading-tight hover:text-blush">
-                  Vestido Longo Caramelo
-                </Link>
-              </div>
-            </motion.div>
+            {FEATURED && (
+              <motion.div
+                className="absolute bottom-6 left-10 z-10 flex items-center gap-3 rounded-2xl bg-paper/15 p-2.5 pr-5 backdrop-blur-xl sm:left-16 lg:bottom-16 lg:left-2"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: d + 1.3, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <div className="relative h-14 w-12 overflow-hidden rounded-xl">
+                  <Image src={FEATURED.hoverImage ?? FEATURED.image} alt="" fill sizes="48px" className="object-cover" />
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-blush">{HERO.featuredLabel}</p>
+                  <Link href={`/catalogo/${FEATURED.slug}`} className="font-display text-lg leading-tight hover:text-blush">
+                    {FEATURED.name}
+                  </Link>
+                </div>
+              </motion.div>
+            )}
           </div>
         </div>
       </div>

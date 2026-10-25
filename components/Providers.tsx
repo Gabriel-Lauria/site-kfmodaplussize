@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Lenis from "lenis";
 import { MotionConfig } from "motion/react";
 import { usePathname } from "next/navigation";
+import { FEATURES } from "@/config";
 import { setLenis } from "@/lib/lenis";
 import { SelectionProvider } from "./Selection";
 import { Cursor } from "./Cursor";
@@ -40,8 +41,8 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <MotionConfig reducedMotion="user">
       <SelectionProvider>
         <SmoothScroll />
-        <Intro />
-        <Cursor />
+        {FEATURES.showIntro && <Intro />}
+        {FEATURES.showCursor && <Cursor />}
         {children}
         <FloatingWhatsApp />
       </SelectionProvider>

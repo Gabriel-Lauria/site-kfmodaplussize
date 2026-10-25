@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FlowerMark } from "@/components/FlowerMark";
+import { BRAND } from "@/config";
 
 export default function NotFound() {
   return (
@@ -7,9 +8,9 @@ export default function NotFound() {
       <FlowerMark bloom className="h-24 w-24" />
       <p className="mt-8 text-xs uppercase tracking-[0.24em] text-rose">Erro 404</p>
       <h1 className="mt-3 font-display text-5xl leading-tight tracking-tight sm:text-6xl">
-        Essa flor <em className="text-wine">não brotou</em> aqui.
+        {BRAND.notFound.title[0]} <em className="text-wine">{BRAND.notFound.title[1]}</em> {BRAND.notFound.title[2]}
       </h1>
-      <p className="mt-5 text-ink/70">A página que você procurou não existe ou mudou de lugar. Que tal dar uma olhada nas novidades?</p>
+      <p className="mt-5 text-ink/70">{BRAND.notFound.text}</p>
       <div className="mt-10 flex flex-wrap justify-center gap-3">
         <Link href="/catalogo" className="rounded-full bg-wine px-7 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-paper transition hover:bg-wine-deep">
           Ver catálogo

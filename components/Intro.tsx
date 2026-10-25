@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import { BRAND, storageKey } from "@/config";
 import { FlowerMark } from "./FlowerMark";
 
 // Abertura: a flor desabrocha e "mergulhamos" nela para revelar o site. Uma vez por sessão.
@@ -15,7 +16,7 @@ export function Intro() {
       return;
     }
     try {
-      sessionStorage.setItem("ef-intro", "1");
+      sessionStorage.setItem(storageKey("intro"), "1");
     } catch {}
     const t1 = setTimeout(() => setDive(true), 1350);
     const t2 = setTimeout(() => setShow(false), 2050);
@@ -48,7 +49,7 @@ export function Intro() {
             animate={dive ? { opacity: 0 } : { opacity: 1, y: 0 }}
             transition={{ delay: dive ? 0 : 0.6, duration: 0.5 }}
           >
-            Espaço Flor
+            {BRAND.name}
           </motion.p>
         </motion.div>
       )}

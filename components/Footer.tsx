@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "motion/react";
-import { CONTACT, STORES, waLink } from "@/lib/data";
+import { BRAND, CONTACT, FEATURES, STORES, STORES_NAV, waLink } from "@/config";
 import { FlowerMark } from "./FlowerMark";
 import { Instagram, WhatsApp } from "./Icons";
 
@@ -19,16 +19,14 @@ export function Footer() {
         <div>
           <div className="flex items-center gap-3">
             <FlowerMark className="h-10 w-10" />
-            <span className="font-display text-2xl">Espaço Flor</span>
+            <span className="font-display text-2xl">{BRAND.name}</span>
           </div>
-          <p className="mt-5 max-w-xs text-sm leading-relaxed text-paper/70">
-            Moda feminina com 10 lojas em Curitiba e São José dos Pinhais. Peças escolhidas a dedo para você florescer todos os dias.
-          </p>
+          <p className="mt-5 max-w-xs text-sm leading-relaxed text-paper/70">{BRAND.footer.about}</p>
           <div className="mt-6 flex gap-2">
             <a href={CONTACT.instagram} target="_blank" rel="noopener noreferrer" className="rounded-full border border-paper/20 p-3 transition hover:border-rose hover:bg-rose" aria-label="Instagram">
               <Instagram />
             </a>
-            <a href={waLink("Olá! Vim pelo site da Espaço Flor.")} target="_blank" rel="noopener noreferrer" className="rounded-full border border-paper/20 p-3 transition hover:border-rose hover:bg-rose" aria-label="WhatsApp">
+            <a href={waLink(BRAND.messages.default)} target="_blank" rel="noopener noreferrer" className="rounded-full border border-paper/20 p-3 transition hover:border-rose hover:bg-rose" aria-label="WhatsApp">
               <WhatsApp />
             </a>
           </div>
@@ -39,20 +37,37 @@ export function Footer() {
           <ul className="mt-5 space-y-2.5 text-sm text-paper/80">
             <li><Link className="transition hover:text-rose" href="/">Início</Link></li>
             <li><Link className="transition hover:text-rose" href="/catalogo">Catálogo</Link></li>
-            <li><Link className="transition hover:text-rose" href="/lojas">Nossas lojas</Link></li>
-            <li><a className="transition hover:text-rose" href={CONTACT.linktree} target="_blank" rel="noopener noreferrer">Links úteis</a></li>
+            <li><Link className="transition hover:text-rose" href="/lojas">{STORES_NAV}</Link></li>
+            {CONTACT.linktree && (
+              <li><a className="transition hover:text-rose" href={CONTACT.linktree} target="_blank" rel="noopener noreferrer">Links úteis</a></li>
+            )}
           </ul>
         </div>
 
         <div>
-          <h3 className="text-xs uppercase tracking-[0.2em] text-blush">Lojas</h3>
-          <ul className="mt-5 grid grid-cols-2 gap-x-4 gap-y-2.5 text-sm text-paper/80">
-            {STORES.map((s) => (
-              <li key={s.slug}>
-                <Link className="transition hover:text-rose" href={`/lojas#${s.slug}`}>{s.name}</Link>
-              </li>
-            ))}
-          </ul>
+          <h3 className="text-xs uppercase tracking-[0.2em] text-blush">{FEATURES.showStores ? "Lojas" : "Endereço"}</h3>
+          {FEATURES.showStores ? (
+            <ul className="mt-5 grid grid-cols-2 gap-x-4 gap-y-2.5 text-sm text-paper/80">
+              {STORES.map((s) => (
+                <li key={s.slug}>
+                  <Link className="transition hover:text-rose" href={`/lojas#${s.slug}`}>{s.name}</Link>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <ul className="mt-5 space-y-2.5 text-sm text-paper/80">
+              {STORES.map((s) => (
+                <li key={s.slug}>
+                  <Link className="transition hover:text-rose" href={`/lojas#${s.slug}`}>
+                    {s.area}
+                    <br />
+                    {[s.city, s.state].filter(Boolean).join(" · ")}
+                    {s.postalCode && <> · {s.postalCode}</>}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         <div>
@@ -60,29 +75,35 @@ export function Footer() {
           <ul className="mt-5 space-y-2.5 text-sm text-paper/80">
             <li>WhatsApp {CONTACT.whatsappLabel}</li>
             <li>{CONTACT.instagramHandle}</li>
-            <li>Curitiba e São José dos Pinhais, PR</li>
+            <li>{CONTACT.location}</li>
           </ul>
         </div>
       </div>
 
       <div className="relative mx-auto max-w-[1400px] px-4 sm:px-8">
         <motion.p style={{ y }} className="flex select-none items-center gap-[2vw] whitespace-nowrap font-display text-[17vw] leading-[0.8] tracking-tight text-paper/[0.07]">
-          Espaço
+          {BRAND.wordmark[0]}
           <motion.span style={{ rotate }} className="inline-block">
             <FlowerMark mono="#E2589B" className="h-[12vw] w-[12vw] opacity-60" />
           </motion.span>
-          Flor
+          {BRAND.wordmark[1]}
         </motion.p>
       </div>
 
       <div className="mx-auto flex max-w-[1400px] flex-col justify-between gap-2 border-t border-paper/10 px-4 py-6 text-xs text-paper/50 sm:flex-row sm:px-8">
-        <p>© {new Date().getFullYear()} Espaço Flor · Moda Feminina</p>
-        <p>
-          Sonhada por{" "}
-          <a href={CONTACT.founderUrl} target="_blank" rel="noopener noreferrer" className="text-blush hover:text-rose">
-            {CONTACT.founder}
-          </a>
-        </p>
+        <p>© {new Date().getFullYear()} {BRAND.name} · {BRAND.segment}</p>
+        {BRAND.credit && (
+          <p>
+            {BRAND.credit.label}{" "}
+            {BRAND.credit.url ? (
+              <a href={BRAND.credit.url} target="_blank" rel="noopener noreferrer" className="text-blush hover:text-rose">
+                {BRAND.credit.name}
+              </a>
+            ) : (
+              <span className="text-blush">{BRAND.credit.name}</span>
+            )}
+          </p>
+        )}
       </div>
     </footer>
   );

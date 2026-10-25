@@ -3,7 +3,7 @@
 import { useCallback, useMemo } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { AnimatePresence, LayoutGroup, motion } from "motion/react";
-import { CATEGORIES, PRODUCTS, type Category } from "@/lib/data";
+import { BRAND, CATEGORIES, PRODUCTS, type Category } from "@/config";
 import { ProductCard } from "./ProductCard";
 import { QuickView } from "./QuickView";
 import { SplitWords } from "./motion-utils";
@@ -47,9 +47,7 @@ export function Catalog() {
               <SplitWords text="Catálogo" onView={false} delay={0.4} />
             </h1>
           </div>
-          <p className="max-w-sm text-ink/70">
-            Salve no coração o que você amar e envie sua seleção pelo WhatsApp. A gente confirma tamanho, cor e a loja mais perto.
-          </p>
+          <p className="max-w-sm text-ink/70">{BRAND.catalog.intro}</p>
         </div>
       </section>
 

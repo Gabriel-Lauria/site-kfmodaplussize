@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useAnimationControls, useMotionValueEvent, useScroll } from "motion/react";
-import { CONTACT, waLink } from "@/lib/data";
+import { BRAND, CONTACT, STORES_NAV, waLink } from "@/config";
 import { lockScroll } from "@/lib/lenis";
 import { FlowerMark } from "./FlowerMark";
 import { useSelection } from "./Selection";
@@ -13,14 +13,10 @@ import { Heart, WhatsApp } from "./Icons";
 const LINKS = [
   { href: "/", label: "Início" },
   { href: "/catalogo", label: "Catálogo" },
-  { href: "/lojas", label: "Nossas lojas" },
+  { href: "/lojas", label: STORES_NAV },
 ];
 
-const ANNOUNCEMENTS = [
-  "10 lojas em Curitiba e São José dos Pinhais",
-  `Compre pelo WhatsApp ${CONTACT.whatsappLabel}`,
-  `Novidades toda semana no ${CONTACT.instagramHandle}`,
-];
+const ANNOUNCEMENTS = BRAND.announcements;
 
 export function Header() {
   const pathname = usePathname();
@@ -71,12 +67,12 @@ export function Header() {
 
         <nav className="border-b border-ink/5 bg-paper/80 backdrop-blur-xl">
           <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-4 sm:px-8">
-            <Link href="/" className="group flex items-center gap-2.5" aria-label="Espaço Flor, início">
+            <Link href="/" className="group flex items-center gap-2.5" aria-label={`${BRAND.name}, início`}>
               <motion.span whileHover={{ rotate: 120 }} transition={{ type: "spring", stiffness: 200, damping: 12 }} className="block">
                 <FlowerMark className="h-9 w-9" />
               </motion.span>
               <span className="font-display text-xl tracking-tight">
-                Espaço <em className="text-wine">Flor</em>
+                {BRAND.wordmark[0]} <em className="text-wine">{BRAND.wordmark[1]}</em>
               </span>
             </Link>
 
@@ -123,7 +119,7 @@ export function Header() {
                 </AnimatePresence>
               </button>
               <a
-                href={waLink("Olá! Vim pelo site da Espaço Flor.")}
+                href={waLink(BRAND.messages.default)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hidden items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-paper transition hover:bg-wine sm:flex"
@@ -159,7 +155,7 @@ export function Header() {
               ))}
             </ul>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="mt-10 space-y-2 text-sm text-blush">
-              <a href={waLink("Olá! Vim pelo site da Espaço Flor.")} className="block">WhatsApp {CONTACT.whatsappLabel}</a>
+              <a href={waLink(BRAND.messages.default)} className="block">WhatsApp {CONTACT.whatsappLabel}</a>
               <a href={CONTACT.instagram} className="block">Instagram {CONTACT.instagramHandle}</a>
             </motion.div>
           </motion.div>

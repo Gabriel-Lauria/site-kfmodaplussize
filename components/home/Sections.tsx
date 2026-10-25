@@ -4,19 +4,14 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
-import { CONTACT, PRODUCTS, waLink } from "@/lib/data";
+import { BRAND, CONTACT, HOME_CATEGORIES, PRODUCTS, waLink } from "@/config";
 import { FlowerMark } from "../FlowerMark";
 import { Magnetic } from "../Magnetic";
 import { ProductCard } from "../ProductCard";
 import { Reveal, SplitWords } from "../motion-utils";
 import { ArrowRight, Instagram, WhatsApp } from "../Icons";
 
-const PERKS = [
-  { title: "10 lojas físicas", text: "Curitiba e São José dos Pinhais", icon: "M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z M12 7v5" },
-  { title: "Compre pelo WhatsApp", text: "Atendimento de consultora", icon: "M4 5h16v11H8l-4 4V5z M8 10h8" },
-  { title: "Novidades toda semana", text: `No ${CONTACT.instagramHandle}`, icon: "M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M6 18l2.5-2.5M15.5 8.5L18 6" },
-  { title: "Do básico à festa", text: "Looks para todos os momentos", icon: "M8 3l4 3 4-3 3 4-3 2v12H8V9L5 7l3-4z" },
-];
+const PERKS = BRAND.perks;
 
 export function Perks() {
   return (
@@ -46,24 +41,19 @@ export function Perks() {
   );
 }
 
-const CATS = [
-  { name: "Vestidos", image: "/images/vestido-plissado.png", hover: "/images/vestido-boho.png" },
-  { name: "Conjuntos", image: "/images/conjunto-azul.png", hover: "/images/tule-noir.png" },
-  { name: "Básicos", image: "/images/regatas-modelo.png", hover: "/images/regatas-cores.png" },
-  { name: "Bolsas", image: "/images/bolsa-petroleo.png", hover: "/images/bolsa-nude.png" },
-];
+const CATS = HOME_CATEGORIES;
 
 export function Categories() {
   return (
     <section className="mx-auto max-w-[1400px] px-4 py-16 sm:px-8">
       <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
         <h2 className="font-display text-5xl leading-[0.95] tracking-tight sm:text-6xl">
-          <SplitWords text="Escolha por" />
+          <SplitWords text={BRAND.categories.title[0]} />
           <br />
-          <SplitWords text="onde começar" delay={0.15} className="italic text-wine" />
+          <SplitWords text={BRAND.categories.title[1]} delay={0.15} className="italic text-wine" />
         </h2>
         <Reveal>
-          <p className="max-w-xs text-sm text-muted">Passe o mouse para ver mais. Toque para abrir a categoria no catálogo.</p>
+          <p className="max-w-xs text-sm text-muted">{BRAND.categories.hint}</p>
         </Reveal>
       </div>
       <motion.div
@@ -111,10 +101,10 @@ export function Featured() {
       <div className="mx-auto mb-10 flex max-w-[1400px] flex-wrap items-end justify-between gap-6 px-4 sm:px-8">
         <div>
           <Reveal>
-            <p className="text-xs uppercase tracking-[0.24em] text-rose">Em destaque</p>
+            <p className="text-xs uppercase tracking-[0.24em] text-rose">{BRAND.featured.eyebrow}</p>
           </Reveal>
           <h2 className="mt-3 font-display text-5xl tracking-tight sm:text-6xl">
-            <SplitWords text="Queridinhas da semana" />
+            <SplitWords text={BRAND.featured.title} />
           </h2>
         </div>
         <div className="flex items-center gap-3">
@@ -147,12 +137,11 @@ export function Featured() {
   );
 }
 
-const MANIFESTO =
-  "De Curitiba para o seu guarda-roupa. Dez lojas, um mesmo cuidado: peças escolhidas a dedo para mulheres reais vestirem o que as faz florescer, todos os dias.";
+const MANIFESTO = BRAND.manifesto.text;
 
 function Word({ word, progress, range }: { word: string; progress: MotionValue<number>; range: [number, number] }) {
   const opacity = useTransform(progress, range, [0.12, 1]);
-  const highlight = /florescer|cuidado/.test(word);
+  const highlight = BRAND.manifesto.highlight.some((h) => word.includes(h));
   return (
     <motion.span style={{ opacity }} className={`mr-[0.25em] inline-block ${highlight ? "italic text-rose" : ""}`}>
       {word}
@@ -191,17 +180,17 @@ export function FinalCta() {
         <motion.div aria-hidden className="pointer-events-none absolute -bottom-20 -right-10 h-72 w-72 opacity-60" animate={{ rotate: hover ? -180 : 0 }} transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}>
           <FlowerMark />
         </motion.div>
-        <p className="relative text-xs uppercase tracking-[0.24em] text-wine">Atendimento de verdade</p>
+        <p className="relative text-xs uppercase tracking-[0.24em] text-wine">{BRAND.finalCta.eyebrow}</p>
         <h2 className="relative mx-auto mt-4 max-w-3xl font-display text-5xl leading-[0.95] tracking-tight sm:text-7xl">
-          <SplitWords text="Achou a sua peça?" />
+          <SplitWords text={BRAND.finalCta.title[0]} />
           <br />
-          <SplitWords text="A gente separa." delay={0.2} className="italic text-wine" />
+          <SplitWords text={BRAND.finalCta.title[1]} delay={0.2} className="italic text-wine" />
         </h2>
-        <p className="relative mx-auto mt-6 max-w-md text-ink/70">Mande uma mensagem com a foto ou o nome da peça. Nossa equipe confirma tamanho, cor e em qual loja ela está.</p>
+        <p className="relative mx-auto mt-6 max-w-md text-ink/70">{BRAND.finalCta.text}</p>
         <div className="relative mt-10 flex flex-wrap items-center justify-center gap-4" onPointerEnter={() => setHover(true)} onPointerLeave={() => setHover(false)}>
           <Magnetic strength={0.5}>
             <a
-              href={waLink("Olá! Vim pelo site da Espaço Flor e quero ajuda para escolher uma peça.")}
+              href={waLink(BRAND.finalCta.message)}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 rounded-full bg-wine px-8 py-5 text-sm font-semibold uppercase tracking-[0.14em] text-paper shadow-[0_20px_50px_-15px_rgba(122,29,59,0.7)] transition hover:bg-wine-deep"
