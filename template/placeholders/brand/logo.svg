@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 160">
-  <circle cx="80" cy="80" r="56" fill="#ffffff" stroke="#2b1b20" stroke-width="5"/>
+  <circle cx="80" cy="80" r="56" fill="none" stroke="#2b1b20" stroke-width="5"/>
   <path d="M65 102 L80 58 L95 102 M71 86 H89" fill="none" stroke="#2b1b20" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
   <text x="160" y="100" font-family="Georgia, serif" font-size="60" fill="#2b1b20">Nome da Loja</text>
 </svg>

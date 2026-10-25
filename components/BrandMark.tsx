@@ -24,15 +24,15 @@ function render(node: MarkNode, key: number, mono?: string): ReactNode {
   if (mono && node.monoHide) return null;
   const props: Record<string, unknown> = { ...node.props, key };
   if (mono) {
-    // sem fill/stroke próprios, o elemento herda a cor única definida no <svg>
+    // formas preenchidas herdam a cor única do <svg> (sem contorno);
+    // formas só de contorno (fill="none") mantêm o traço, na cor única
+    const outline = props.fill === "none" && props.stroke !== undefined && props.stroke !== "none";
+    const style = { ...(props.style as CSSProperties | undefined) };
+    delete style.fill;
+    delete style.stroke;
     if (props.fill !== "none") delete props.fill;
     delete props.stroke;
-    if (props.style) {
-      const style = { ...(props.style as CSSProperties) };
-      delete style.fill;
-      delete style.stroke;
-      props.style = style;
-    }
+    props.style = outline ? { ...style, stroke: mono } : style;
   }
   return createElement(node.tag, props, node.children?.map((c, i) => render(c, i, mono)));
 }
