@@ -17,7 +17,7 @@ export const FEATURES: {
   showStores: STORES.length > 1,
   ctaMode: "comprar",
   // Grade padrão das peças (ver SIZE_PRESETS em products.ts).
-  grade: "P-GG",
+  grade: "42-54",
   // Abertura animada com a marca, uma vez por sessão.
   showIntro: true,
   // Bolha que segue o mouse no desktop.

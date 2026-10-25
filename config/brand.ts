@@ -1,82 +1,79 @@
 // Identidade, contatos e textos do cliente. Os componentes não têm texto da marca:
 // tudo que muda de uma loja para outra está aqui.
-import { countWords, plural } from "./format";
-import { STORES } from "./stores";
-
-const N = STORES.length;
-const CITIES = new Set(STORES.map((s) => s.city)).size;
-const LOJAS = `${N} ${plural(N, "loja", "lojas")}`;
+// Gerado por `npm run novo-cliente` e revisado para a KF.
+const CITY = "Curitiba";
 
 const CONTACT = {
-  whatsapp: "5541996817936",
-  whatsappLabel: "(41) 99681-7936",
-  instagram: "https://www.instagram.com/mundoespacoflor/",
-  instagramHandle: "@mundoespacoflor",
-  linktree: "https://linktr.ee/espacoflormundo" as string | undefined,
-  location: "Curitiba e São José dos Pinhais, PR",
+  whatsapp: "554195385799",
+  whatsappLabel: "(41) 9538-5799",
+  instagram: "https://www.instagram.com/kfmodaplussize/",
+  instagramHandle: "@kfmodaplussize",
+  linktree: undefined as string | undefined,
+  location: "Curitiba, PR",
 };
 
-// números do Instagram (seguidores em milhares)
-const SOCIAL = { followers: 57.6, followersSuffix: " mil", followersLabel: "seguidoras no Instagram", posts: 6691 };
+// números do Instagram (seguidores em milhares) — out/2026
+const SOCIAL = { followers: 14.8, followersSuffix: " mil", followersLabel: "seguidoras no Instagram", posts: 3158 };
 
 export const BRAND = {
-  name: "Espaço Flor",
-  // prefixo das chaves de sessionStorage/localStorage (ex.: "ef-intro")
-  slug: "ef",
+  name: "KF Moda Plus Size",
+  // prefixo das chaves de sessionStorage/localStorage (ex.: "kf-intro")
+  slug: "kf",
   // logo em texto ao lado da marca; a 2ª parte fica em itálico na cor primária
-  wordmark: ["Espaço", "Flor"] as [string, string],
+  wordmark: ["Moda", "Plus Size"] as [string, string],
   // true = usa /public/brand/logo.svg no lugar de marca + wordmark
   logoImage: false,
-  segment: "Moda Feminina",
-  siteUrl: (process.env.NEXT_PUBLIC_SITE_URL || "https://espacoflor.com.br").replace(/\/$/, ""),
-  // enfeite usado em mensagens curtas ("Link copiado ✿")
-  ornament: "✿",
+  segment: "Moda Curvy e Plus Size",
+  siteUrl: (process.env.NEXT_PUBLIC_SITE_URL || "https://kfmodaplussize.vercel.app").replace(/\/$/, ""),
+  // enfeite usado em mensagens curtas ("Link copiado ✦")
+  ornament: "✦",
 
   seo: {
-    title: "Espaço Flor | Moda Feminina em Curitiba e SJP",
-    description: `Moda feminina com ${LOJAS} em Curitiba e São José dos Pinhais. Vestidos, conjuntos, básicos e bolsas. Veja o catálogo e compre pelo WhatsApp.`,
-    ogTitle: "Espaço Flor | Moda Feminina",
-    ogDescription: `${LOJAS} em Curitiba e SJP. Veja o catálogo e encontre a loja mais perto de você.`,
-    ogImage: "/brand/hero/hero.png",
-    schemaDescription: `Moda feminina com ${LOJAS} em Curitiba e São José dos Pinhais.`,
-    areaServed: ["Curitiba", "São José dos Pinhais"],
+    title: `KF Moda Plus Size | Moda Curvy e Plus Size em ${CITY}`,
+    description: `Moda curvy e plus size do 42 ao 54 em ${CITY}, com envio para todo o Brasil. Conjuntos, vestidos, camisas e calças. Veja o catálogo e compre pelo WhatsApp.`,
+    ogTitle: "KF Moda Plus Size | Do 42 ao 54",
+    ogDescription: "Modelagem que valoriza o corpo real. Loja em Curitiba e envio para todo o Brasil.",
+    ogImage: "/brand/hero/hero.jpg",
+    schemaDescription: `Moda curvy e plus size do 42 ao 54 em ${CITY}, com envio para todo o Brasil.`,
+    areaServed: [CITY, "Brasil"],
   },
 
   contact: CONTACT,
 
   // assinatura no rodapé; use null para esconder
-  credit: { label: "Sonhada por", name: "@anapaulathomazi", url: "https://www.instagram.com/anapaulathomazi/" } as { label: string; name: string; url?: string } | null,
+  credit: { label: "Por", name: "Ketlhen Felisbino" } as { label: string; name: string; url?: string } | null,
 
   // mostrados no hero e na seção do provador
   social: SOCIAL,
 
   announcements: [
-    `${LOJAS} em Curitiba e São José dos Pinhais`,
+    "Moda curvy e plus size do 42 ao 54",
     `Compre pelo WhatsApp ${CONTACT.whatsappLabel}`,
-    `Novidades toda semana no ${CONTACT.instagramHandle}`,
+    "Enviamos para todo o Brasil",
+    `Loja na Rua Mauá, ${CITY}`,
   ],
 
   hero: {
-    eyebrow: "Nova estação · Curitiba e SJP",
+    eyebrow: `Curvy e plus size · ${CITY}`,
     // 3 linhas; a última fica em itálico na cor de acento
-    title: ["Vista o que", "te faz", "florescer."] as [string, string, string],
-    text: `Vestidos, conjuntos, básicos e bolsas escolhidos a dedo. ${countWords(N, "loja", "lojas")} em Curitiba e São José dos Pinhais esperando por você.`,
-    script: "do seu jeito",
-    badge: `ESPAÇO FLOR • ${LOJAS.toUpperCase()} • CURITIBA E SJP •`,
-    image: "/brand/hero/hero.png",
-    imageAlt: "Modelo com vestido longo caramelo no centro de Curitiba",
-    avatars: ["/brand/products/tule-noir.png", "/brand/products/vestido-boho.png", "/brand/products/blusa-assimetrica.png"],
+    title: ["Elegância", "que veste", "do 42 ao 54."] as [string, string, string],
+    text: `Alfaiataria, vestidos e conjuntos com modelagem pensada para o corpo real. Loja em ${CITY} e envio para todo o Brasil.`,
+    script: "corpo real",
+    badge: "KF PLUS SIZE • DO 42 AO 54 • CURITIBA •",
+    image: "/brand/hero/hero.jpg",
+    imageAlt: "Conjunto de suede marsala com cinto dourado, na loja KF",
+    avatars: ["/brand/products/conjunto-trico-chocolate.jpg", "/brand/products/conjunto-poa-listras.jpg", "/brand/products/camisa-cetim-vinho.jpg"],
     // peça do cartão "Look da semana" (usa a foto de hover dela, se houver)
     featuredLabel: "Look da semana",
-    featuredSlug: "vestido-longo-caramelo",
+    featuredSlug: "conjunto-suede-marsala",
   },
 
   // ícones: atributo "d" de um path 24x24 com traço
   perks: [
-    { title: `${LOJAS} físicas`, text: "Curitiba e São José dos Pinhais", icon: "M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z M12 7v5" },
+    { title: "Do 42 ao 54", text: "Modelagem para o corpo real", icon: "M8 3l4 3 4-3 3 4-3 2v12H8V9L5 7l3-4z" },
     { title: "Compre pelo WhatsApp", text: "Atendimento de consultora", icon: "M4 5h16v11H8l-4 4V5z M8 10h8" },
+    { title: "Enviamos para todo o Brasil", text: `Ou prove na loja em ${CITY}`, icon: "M3 7l9-4 9 4v10l-9 4-9-4V7z M3 7l9 4 9-4 M12 11v10" },
     { title: "Novidades toda semana", text: `No ${CONTACT.instagramHandle}`, icon: "M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M6 18l2.5-2.5M15.5 8.5L18 6" },
-    { title: "Do básico à festa", text: "Looks para todos os momentos", icon: "M8 3l4 3 4-3 3 4-3 2v12H8V9L5 7l3-4z" },
   ],
 
   categories: {
@@ -87,85 +84,86 @@ export const BRAND = {
   featured: { eyebrow: "Em destaque", title: "Queridinhas da semana" },
 
   manifesto: {
-    text: `De Curitiba para o seu guarda-roupa. ${countWords(N, "loja", "lojas")}, um mesmo cuidado: peças escolhidas a dedo para mulheres reais vestirem o que as faz florescer, todos os dias.`,
+    text: "Moda plus size feita em Curitiba para mulheres que não querem se esconder. Modelagem que valoriza o corpo real, tecido que cai bem e o cuidado de quem prova cada peça antes de te mostrar.",
     // palavras destacadas em itálico
-    highlight: ["florescer", "cuidado"],
+    highlight: ["real", "cuidado"],
   },
 
   provador: {
-    eyebrow: "Direto do provador",
-    title: ["Mulheres reais,", "looks reais."] as [string, string],
-    text: "Nossas fotos são feitas no provador, do jeito que você vai se ver. Role para passear pelos looks da semana.",
+    eyebrow: "Direto da loja",
+    title: ["Corpo real,", "looks reais."] as [string, string],
+    text: "As fotos são feitas por nós, na loja, do jeito que a peça veste de verdade. Role para passear pelos looks da semana.",
     stats: [
       { to: SOCIAL.followers, decimals: 1, label: "mil seguidoras" },
       { to: SOCIAL.posts, label: "publicações" },
-      { to: N, label: plural(N, "loja", "lojas") },
-      { to: CITIES, label: plural(CITIES, "cidade", "cidades") },
+      { to: 7, label: "tamanhos, do 42 ao 54" },
+      { to: 27, label: "estados com entrega" },
     ] as { to: number; decimals?: number; label: string }[],
   },
 
   finalCta: {
     eyebrow: "Atendimento de verdade",
     title: ["Achou a sua peça?", "A gente separa."] as [string, string],
-    text: "Mande uma mensagem com a foto ou o nome da peça. Nossa equipe confirma tamanho, cor e em qual loja ela está.",
-    message: "Olá! Vim pelo site da Espaço Flor e quero ajuda para escolher uma peça.",
+    text: "Mande a foto ou o nome da peça. A gente confirma tamanho e cor e envia para todo o Brasil.",
+    message: `Olá! Vim pelo site da KF Moda Plus Size e quero ajuda para escolher uma peça.`,
   },
 
   // vitrine de lojas (home e /lojas) ou bloco "Visite a loja" quando há 1 loja
   stores: {
-    eyebrowHome: "Visite a gente",
-    eyebrowPage: "Endereços",
-    titleAccent: "Uma só flor.",
-    text: "Do calçadão da Rua XV aos shoppings, e também em São José dos Pinhais. Escolha a loja mais perto e fale direto com a nossa equipe.",
+    eyebrowHome: "Rua Mauá · Curitiba",
+    eyebrowPage: "Endereço",
+    titleAccent: "Prove com calma.",
+    text: "Na loja você prova tudo com atendimento de quem entende de modelagem plus size. Não está em Curitiba? A gente envia para todo o Brasil.",
   },
 
   storesPage: {
-    metaDescription: `As ${LOJAS} Espaço Flor em Curitiba e São José dos Pinhais: Rua XV, João Negrão, Shopping Estação, Palladium, Jockey Plaza, Jardim das Américas e São José.`,
-    eyebrow: "Curitiba · São José dos Pinhais",
+    metaDescription: `Loja KF Moda Plus Size na Rua Mauá, 905, em ${CITY}. Moda curvy e plus size do 42 ao 54.`,
+    eyebrow: "Curitiba · PR",
     // a linha do meio fica em itálico na cor primária
-    title: ["Sempre tem uma", "Espaço Flor", "perto de você."] as [string, string, string],
-    image: "/brand/hero/loja.png",
-    imageAlt: "Vitrine de uma loja Espaço Flor",
+    title: ["A gente te espera", "na Rua Mauá,", `em ${CITY}.`] as [string, string, string],
+    image: "/brand/hero/loja.jpg",
+    imageAlt: "Interior da loja KF Moda Plus Size, com araras e lustre",
     faqTitle: ["Antes de", "sair de casa"] as [string, string],
     faq: [
-      { q: "Qual o horário das lojas?", a: "Cada loja tem o seu horário, principalmente as de shopping. Chame no WhatsApp que a gente informa o horário da loja que você quer visitar." },
-      { q: "A peça que vi no site está na loja perto de mim?", a: "O estoque muda rápido. Envie sua seleção pelo WhatsApp e confirmamos em qual loja a peça está no tamanho e na cor que você quer." },
+      { q: "Qual o horário da loja?", a: "Chame no WhatsApp que a gente informa o horário e já deixa as peças separadas para você provar." },
+      { q: "Vocês enviam para fora de Curitiba?", a: "Sim, enviamos para todo o Brasil. Mande sua seleção pelo WhatsApp e a gente passa frete e prazo." },
+      { q: "Qual a numeração das peças?", a: "Trabalhamos do 42 ao 54. Na dúvida entre dois tamanhos, mande suas medidas pelo WhatsApp que a gente ajuda." },
       { q: "Posso reservar uma peça para provar?", a: `Fale com a nossa equipe pelo WhatsApp ${CONTACT.whatsappLabel} e combinamos a melhor forma de te atender.` },
     ],
-    message: "Olá! Vim pelo site e quero saber sobre as lojas Espaço Flor.",
+    message: "Olá! Vim pelo site e quero saber sobre a loja KF Moda Plus Size.",
   },
 
   catalog: {
-    metaDescription: "Vestidos, conjuntos, blusas, básicos e bolsas da Espaço Flor. Escolha suas peças e peça pelo WhatsApp.",
-    intro: "Salve no coração o que você amar e envie sua seleção pelo WhatsApp. A gente confirma tamanho, cor e a loja mais perto.",
+    metaDescription: "Conjuntos, vestidos, camisas e calças plus size do 42 ao 54. Escolha suas peças e peça pelo WhatsApp.",
+    intro: "Salve no coração o que você amar e envie sua seleção pelo WhatsApp. A gente confirma tamanho e cor e envia para todo o Brasil.",
   },
 
   product: {
-    // "Disponível nas lojas físicas. Confirme estoque pelo WhatsApp ou [encontre a loja mais perto]."
-    note: "Disponível nas lojas físicas. Confirme estoque pelo WhatsApp ou ",
-    noteLink: "encontre a loja mais perto",
+    note: "Na loja em Curitiba ou com envio para todo o Brasil. Confirme estoque pelo WhatsApp ou ",
+    noteLink: "veja como chegar",
   },
 
   selection: {
-    footer: "A gente confirma tamanho, cor e a loja mais perto de você.",
+    footer: "A gente confirma tamanho, cor e o frete para a sua cidade.",
   },
 
   notFound: {
-    // "Essa flor *não brotou* aqui."
-    title: ["Essa flor", "não brotou", "aqui."] as [string, string, string],
+    title: ["Essa página", "não está", "na arara."] as [string, string, string],
     text: "A página que você procurou não existe ou mudou de lugar. Que tal dar uma olhada nas novidades?",
   },
 
   footer: {
-    about: `Moda feminina com ${LOJAS} em Curitiba e São José dos Pinhais. Peças escolhidas a dedo para você florescer todos os dias.`,
+    // versão curta do nome gigante no fim da página (padrão: wordmark)
+    wordmark: ["Plus", "Size"] as [string, string],
+    about: `Moda curvy e plus size do 42 ao 54, com modelagem que valoriza o corpo real. Loja em ${CITY} e envio para todo o Brasil.`,
   },
 
-  floatingHint: "Posso te ajudar a escolher? ✿",
+  floatingHint: "Posso te ajudar a escolher? ✦",
 
   messages: {
-    default: "Olá! Vim pelo site da Espaço Flor.",
-    help: "Olá! Vim pelo site da Espaço Flor e quero ajuda.",
-    store: (store: string) => `Olá! Vim pelo site e quero falar com a loja ${store} da Espaço Flor.`,
+    default: "Olá! Vim pelo site da KF Moda Plus Size.",
+    help: "Olá! Vim pelo site da KF Moda Plus Size e quero ajuda.",
+    store: (store: string) => `Olá! Vim pelo site da ${store} e quero visitar a loja.`,
   },
 
   // Textos dos botões de WhatsApp para cada ctaMode (features.ts).
@@ -178,7 +176,7 @@ export const BRAND = {
         `Olá! Vim pelo site e quero: ${name} · cor ${color}${size ? ` · tamanho ${size}` : ""}. Tem disponível?`,
       selectionButton: "Enviar seleção no WhatsApp",
       selection: (names: string[]) =>
-        "Olá! Vim pelo site da Espaço Flor e separei estas peças:\n" + names.map((n) => `• ${n}`).join("\n") + "\nQual loja tem disponível?",
+        "Olá! Vim pelo site da KF Moda Plus Size e separei estas peças:\n" + names.map((n) => `• ${n}`).join("\n") + "\nTem disponível?",
     },
     "agendar-prova": {
       button: "Agendar prova",
@@ -188,7 +186,7 @@ export const BRAND = {
         `Olá! Vim pelo site e quero agendar uma prova de: ${name} · cor ${color}${size ? ` · tamanho ${size}` : ""}. Qual o melhor horário?`,
       selectionButton: "Agendar prova no WhatsApp",
       selection: (names: string[]) =>
-        "Olá! Vim pelo site da Espaço Flor e quero provar estas peças:\n" + names.map((n) => `• ${n}`).join("\n") + "\nQual o melhor horário?",
+        "Olá! Vim pelo site da KF Moda Plus Size e quero provar estas peças:\n" + names.map((n) => `• ${n}`).join("\n") + "\nQual o melhor horário?",
     },
   },
 };

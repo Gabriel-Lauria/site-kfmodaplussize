@@ -45,10 +45,10 @@ export function StoreVisit({ variant = "home" }: { variant?: "home" | "page" }) 
                   <BrandMark bloom className="h-10 w-10 shrink-0" />
                 </div>
                 <div className="mt-5 flex flex-wrap gap-2">
-                  <a href={mapsLink(store.mapsQuery)} target="_blank" rel="noopener noreferrer" className="flex flex-1 items-center justify-center gap-2 rounded-full bg-ink px-5 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-paper transition hover:bg-primary">
+                  <a href={mapsLink(store.mapsQuery)} target="_blank" rel="noopener noreferrer" className="flex grow basis-40 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-ink px-5 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-paper transition hover:bg-primary">
                     <Pin className="h-4 w-4" /> Como chegar
                   </a>
-                  <a href={storeWhatsapp(store)} target="_blank" rel="noopener noreferrer" className="flex flex-1 items-center justify-center gap-2 rounded-full border border-ink/15 px-5 py-3 text-xs font-semibold uppercase tracking-[0.12em] transition hover:border-primary hover:text-primary">
+                  <a href={storeWhatsapp(store)} target="_blank" rel="noopener noreferrer" className="flex grow basis-40 items-center justify-center gap-2 whitespace-nowrap rounded-full border border-ink/15 px-5 py-3 text-xs font-semibold uppercase tracking-[0.12em] transition hover:border-primary hover:text-primary">
                     <WhatsApp className="h-4 w-4" /> Falar com a loja
                   </a>
                 </div>

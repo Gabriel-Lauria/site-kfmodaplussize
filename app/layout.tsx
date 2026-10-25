@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Manrope } from "next/font/google";
+import { Cormorant_Garamond, Montserrat } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/Providers";
 import { Header } from "@/components/Header";
@@ -10,14 +10,14 @@ import { BRAND, CONTACT, FEATURES, SITE_URL, STORES, formatPhone, storageKey } f
 // Troque as duas importações e chamadas abaixo para mudar a tipografia.
 // display = títulos (precisa de itálico); sans = textos e botões.
 // Mantenha as variáveis --font-brand-display e --font-brand-sans.
-const display = Fraunces({
+const display = Cormorant_Garamond({
   subsets: ["latin"],
   variable: "--font-brand-display",
+  weight: ["300", "400", "500", "600"],
   style: ["normal", "italic"],
-  axes: ["SOFT", "opsz"],
 });
 
-const sans = Manrope({
+const sans = Montserrat({
   subsets: ["latin"],
   variable: "--font-brand-sans",
 });

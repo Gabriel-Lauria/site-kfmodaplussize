@@ -7,21 +7,21 @@
    ========================================================================== */
 @theme static {
   /* palette:start */
-  --color-primary: #7a1d3b;       /* cor principal: botões, títulos em itálico, pílulas ativas */
-  --color-primary-deep: #4a0f24;  /* fundo escuro: hero, vitrine de lojas, rodapé, intro */
-  --color-accent: #e2589b;        /* acento: palavras em destaque, etiquetas, coração */
-  --color-accent-soft: #f6cfdf;   /* acento claro: textos sobre o fundo escuro, faixa do CTA */
-  --color-highlight: #b26b34;     /* terceira cor: brilho do hero, gradiente do Instagram */
-  --color-paper: #fbf7f2;         /* fundo do site */
-  --color-cream: #f3eadf;         /* fundo de cartões e fotos */
-  --color-sand: #e4cfaf;
-  --color-ink: #2b1b20;           /* texto */
-  --color-muted: #7a6a6e;         /* texto secundário */
+  --color-primary: #a8483b;       /* cor principal: botões, títulos em itálico, pílulas ativas */
+  --color-primary-deep: #3d1712;  /* fundo escuro: hero, vitrine de lojas, rodapé, intro */
+  --color-accent: #d9705c;        /* acento: palavras em destaque, etiquetas, coração */
+  --color-accent-soft: #f6d3c6;   /* acento claro: textos sobre o fundo escuro, faixa do CTA */
+  --color-highlight: #e8b05e;     /* terceira cor: brilho do hero, gradiente do Instagram */
+  --color-paper: #fcf7f3;         /* fundo do site */
+  --color-cream: #f6e9e1;         /* fundo de cartões e fotos */
+  --color-sand: #ecd5c4;
+  --color-ink: #2a1714;           /* texto */
+  --color-muted: #7f6660;         /* texto secundário */
   /* partículas que caem do cursor no hero */
-  --color-particle-1: #f7b8d2;
-  --color-particle-2: #ee8db8;
-  --color-particle-3: #e2589b;
-  --color-particle-4: #f9c9dc;
+  --color-particle-1: #f9c579;
+  --color-particle-2: #e8b05e;
+  --color-particle-3: #e3806d;
+  --color-particle-4: #f6d3c6;
   /* palette:end */
 
   /* fontes: definidas em app/layout.tsx (bloco FONTES) */

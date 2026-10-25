@@ -88,6 +88,7 @@ Dicas: deixe o rosto no terço de cima (os cards cortam o topo e a base). Prints
 
 - **Textos**: `config/brand.ts` tem tudo (hero, perks, manifesto, FAQ, mensagens do WhatsApp, 404…). Procure por `TODO`. Os textos que dependem do número de lojas já se ajustam sozinhos (`LOJAS`, `countWords`).
 - **Números do Instagram**: `SOCIAL` no topo do `brand.ts` (seguidores em milhares e posts).
+- **Nome gigante do rodapé**: usa o `wordmark` (com a marca no meio). Se o nome for longo e cortar, defina `footer.wordmark` com uma versão curta (a KF usa `["Plus", "Size"]`).
 - **Cores**: bloco `palette:start … palette:end` no topo do `app/globals.css`. Cada token está comentado. Confira o contraste: `primary` e `accent` aparecem como texto sobre o fundo claro; `accent-soft` aparece como texto sobre `primary-deep`.
 - **Fontes**: bloco `FONTES` em `app/layout.tsx`. Troque as duas chamadas do `next/font/google` mantendo as variáveis `--font-brand-display` e `--font-brand-sans`. A fonte de títulos precisa ter itálico.
 - **Recursos** (`config/features.ts`): `ctaMode`, `grade`, `showIntro` (abertura animada), `showCursor` (bolha do mouse), `showPetalTrail` (partículas no hero; as cores são `particle-1..4` da paleta).

@@ -1,0 +1,20 @@
+{
+  "name": "KF Moda Plus Size",
+  "slug": "kf",
+  "wordmark1": "Moda",
+  "wordmark2": "Plus Size",
+  "segment": "Moda Curvy e Plus Size",
+  "primary": "#a8483b",
+  "accent": "#d9705c",
+  "highlight": "#e8b05e",
+  "whatsapp": "+55 41 9538-5799",
+  "instagram": "@kfmodaplussize",
+  "city": "Curitiba",
+  "state": "PR",
+  "stores": "1",
+  "address": "Rua Mauá, 905",
+  "postalCode": "80030-200",
+  "ctaMode": "comprar",
+  "grade": "42-54",
+  "placeholders": "s"
+}

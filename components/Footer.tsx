@@ -8,6 +8,9 @@ import { BrandMark } from "./BrandMark";
 import { Logo } from "./Logo";
 import { Instagram, WhatsApp } from "./Icons";
 
+// nome gigante no fim da página; use footer.wordmark para uma versão curta
+const FOOTER_WORDMARK: [string, string] = ("wordmark" in BRAND.footer && BRAND.footer.wordmark) || BRAND.wordmark;
+
 export function Footer() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end end"] });
@@ -82,11 +85,11 @@ export function Footer() {
 
       <div className="relative mx-auto max-w-[1400px] px-4 sm:px-8">
         <motion.p style={{ y }} className="flex select-none items-center gap-[2vw] whitespace-nowrap font-display text-[17vw] leading-[0.8] tracking-tight text-paper/[0.07]">
-          {BRAND.wordmark[0]}
+          {FOOTER_WORDMARK[0]}
           <motion.span style={{ rotate }} className="inline-block">
             <BrandMark mono="var(--color-accent)" className="h-[12vw] w-[12vw] opacity-60" />
           </motion.span>
-          {BRAND.wordmark[1]}
+          {FOOTER_WORDMARK[1]}
         </motion.p>
       </div>
 

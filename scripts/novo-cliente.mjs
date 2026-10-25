@@ -88,7 +88,7 @@ async function ask() {
 }
 
 // ---------- geradores ----------
-const js = (v) => JSON.stringify(v);
+const js = (v) => (Array.isArray(v) ? `[${v.map((x) => JSON.stringify(x)).join(", ")}]` : JSON.stringify(v));
 
 function phoneLabel(digits) {
   const m = digits.match(/^55(\d{2})(\d+)(\d{4})$/);
@@ -266,7 +266,8 @@ export const BRAND = {
   messages: {
     default: "Olá! Vim pelo site da ${name}.",
     help: "Olá! Vim pelo site da ${name} e quero ajuda.",
-    store: (store: string) => \`Olá! Vim pelo site e quero falar com a loja \${store} da ${name}.\`,
+    store: (store: string) =>
+      N > 1 ? \`Olá! Vim pelo site e quero falar com a loja \${store} da ${name}.\` : \`Olá! Vim pelo site da \${store} e quero visitar a loja.\`,
   },
 
   // Textos dos botões de WhatsApp para cada ctaMode (features.ts).
@@ -454,8 +455,12 @@ function writePalette(colors) {
   const start = css.indexOf("/* palette:start */");
   const end = css.indexOf("/* palette:end */");
   if (start < 0 || end < 0) throw new Error("Marcadores palette:start/end não encontrados em app/globals.css");
-  const lines = Object.entries(colors).map(([k, v]) => `  --color-${k}: ${v};`);
-  const block = `/* palette:start */\n${lines.join("\n")}\n  `;
+  // troca só os valores, mantendo os comentários de cada linha
+  let block = css.slice(start, end);
+  for (const [k, v] of Object.entries(colors)) {
+    const re = new RegExp(`(--color-${k}:\\s*)[^;]+;`);
+    block = re.test(block) ? block.replace(re, `$1${v};`) : block.replace(/\n\s*$/, `\n  --color-${k}: ${v};\n  `);
+  }
   writeFileSync(file("app/globals.css"), css.slice(0, start) + block + css.slice(end));
 }
 
