@@ -37,7 +37,7 @@ export const BRAND = {
     description: `Moda feminina com ${LOJAS} em Curitiba e São José dos Pinhais. Vestidos, conjuntos, básicos e bolsas. Veja o catálogo e compre pelo WhatsApp.`,
     ogTitle: "Espaço Flor | Moda Feminina",
     ogDescription: `${LOJAS} em Curitiba e SJP. Veja o catálogo e encontre a loja mais perto de você.`,
-    ogImage: "/images/vestido-caramelo.png",
+    ogImage: "/brand/hero/hero.png",
     schemaDescription: `Moda feminina com ${LOJAS} em Curitiba e São José dos Pinhais.`,
     areaServed: ["Curitiba", "São José dos Pinhais"],
   },
@@ -63,9 +63,9 @@ export const BRAND = {
     text: `Vestidos, conjuntos, básicos e bolsas escolhidos a dedo. ${countWords(N, "loja", "lojas")} em Curitiba e São José dos Pinhais esperando por você.`,
     script: "do seu jeito",
     badge: `ESPAÇO FLOR • ${LOJAS.toUpperCase()} • CURITIBA E SJP •`,
-    image: "/images/vestido-caramelo.png",
+    image: "/brand/hero/hero.png",
     imageAlt: "Modelo com vestido longo caramelo no centro de Curitiba",
-    avatars: ["/images/tule-noir.png", "/images/vestido-boho.png", "/images/blusa-assimetrica.png"],
+    avatars: ["/brand/products/tule-noir.png", "/brand/products/vestido-boho.png", "/brand/products/blusa-assimetrica.png"],
     // peça do cartão "Look da semana" (usa a foto de hover dela, se houver)
     featuredLabel: "Look da semana",
     featuredSlug: "vestido-longo-caramelo",
@@ -124,7 +124,7 @@ export const BRAND = {
     eyebrow: "Curitiba · São José dos Pinhais",
     // a linha do meio fica em itálico na cor primária
     title: ["Sempre tem uma", "Espaço Flor", "perto de você."] as [string, string, string],
-    image: "/images/vitrine-loja.png",
+    image: "/brand/hero/loja.png",
     imageAlt: "Vitrine de uma loja Espaço Flor",
     faqTitle: ["Antes de", "sair de casa"] as [string, string],
     faq: [

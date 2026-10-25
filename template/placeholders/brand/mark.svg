@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-100 -100 200 200">
+  <!-- Marca provisória: troque pelo símbolo do cliente (quadrado, fundo transparente). -->
+  <circle r="88" fill="#ffffff" stroke="#2b1b20" stroke-width="6"/>
+  <circle r="62" fill="none" stroke="#2b1b20" stroke-width="3" data-delay="0.2"/>
+  <path d="M-26 34 L0 -38 L26 34 M-15 6 H15" fill="none" stroke="#2b1b20" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" data-delay="0.35"/>
+</svg>
