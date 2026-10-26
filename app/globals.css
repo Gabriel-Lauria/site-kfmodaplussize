@@ -16,7 +16,7 @@
   --color-cream: #f6e9e1;         /* fundo de cartões e fotos */
   --color-sand: #ecd5c4;
   --color-ink: #2a1714;           /* texto */
-  --color-muted: #7f6660;         /* texto secundário */
+  --color-muted: #735a54;         /* texto secundário (contraste 4.5:1 sobre o creme) */
   /* partículas que caem do cursor no hero */
   --color-particle-1: #f9c579;
   --color-particle-2: #e8b05e;
@@ -97,5 +97,201 @@ body::after {
   .animate-marquee,
   .animate-spin-slow {
     animation: none;
+  }
+}
+
+/* ==========================================================================
+   Entradas ao rolar (components/motion-utils.tsx). CSS puro: o JS só põe "is-in".
+   ========================================================================== */
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, var(--reveal-y, 28px), 0);
+  transition:
+    opacity 0.9s var(--ease-expo) var(--reveal-delay, 0s),
+    transform 0.9s var(--ease-expo) var(--reveal-delay, 0s);
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+.words .word {
+  transform: translateY(110%) rotate(6deg);
+  transition: transform 1s var(--ease-expo) var(--word-delay, 0s);
+}
+.words.is-in .word {
+  transform: none;
+}
+
+/* títulos do topo: animam já no carregamento, sem esperar o JavaScript */
+.words-now .word {
+  animation: word-rise 1s var(--ease-expo) var(--word-delay, 0s) both;
+}
+@keyframes word-rise {
+  from {
+    transform: translateY(110%) rotate(6deg);
+  }
+}
+
+/* sem JS (o script do <head> põe "js" no html) ou com "reduzir movimento": tudo visível */
+html:not(.js) .reveal,
+html:not(.js) .words .word {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .words .word,
+  .words-now .word {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    animation: none;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+  }
+}
+.fade-up {
+  animation: fade-up 0.6s var(--ease-expo) both;
+}
+
+/* coração da seleção ao marcar */
+@keyframes pop {
+  0% {
+    transform: scale(0.4);
+  }
+  60% {
+    transform: scale(1.2);
+  }
+}
+.pop {
+  display: inline-block;
+  animation: pop 0.45s var(--ease-expo);
+}
+
+/* ==========================================================================
+   Animações que antes eram da biblioteca motion (agora sem JS na carga)
+   ========================================================================== */
+/* símbolo da marca desabrochando (BrandMark bloom) */
+@keyframes bloom {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+.bloom-part {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: bloom 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* cortina com a marca entre páginas (app/(site)/template.tsx) */
+@keyframes curtain-up {
+  from {
+    clip-path: inset(0% 0% 0% 0%);
+  }
+  to {
+    clip-path: inset(0% 0% 100% 0%);
+  }
+}
+@keyframes curtain-mark {
+  to {
+    transform: rotate(120deg) scale(0.4);
+    opacity: 0;
+  }
+}
+.curtain {
+  animation: curtain-up 0.8s cubic-bezier(0.76, 0, 0.24, 1) 0.15s both;
+}
+.curtain-mark {
+  animation: curtain-mark 0.6s ease both;
+}
+.page-in {
+  animation: fade-up 0.8s var(--ease-expo) 0.3s both;
+}
+
+/* partículas do coração da seleção */
+@keyframes burst {
+  from {
+    transform: translate(-3px, -5px) rotate(var(--r));
+    opacity: 1;
+  }
+  to {
+    transform: translate(var(--x), var(--y)) rotate(var(--r)) scale(0.4);
+    opacity: 0;
+  }
+}
+.burst-dot {
+  animation: burst 0.6s ease-out forwards;
+}
+
+/* parallax das fotos do hero: só onde o navegador tem animação por rolagem (Chrome/Edge/Android) */
+@keyframes parallax-down {
+  to {
+    transform: translateY(12%);
+  }
+}
+@keyframes parallax-up {
+  to {
+    transform: translateY(-40%);
+  }
+}
+@supports (animation-timeline: view()) {
+  .parallax-down,
+  .parallax-up {
+    animation: linear both;
+    animation-timeline: view();
+    animation-range: exit;
+  }
+  .parallax-down {
+    animation-name: parallax-down;
+  }
+  .parallax-up {
+    animation-name: parallax-up;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bloom-part,
+  .curtain,
+  .curtain-mark,
+  .page-in,
+  .burst-dot,
+  .pop,
+  .fade-up,
+  .parallax-down,
+  .parallax-up {
+    animation: none !important;
+  }
+  .curtain {
+    display: none;
+  }
+}
+
+/* seções abaixo da primeira dobra: o navegador só calcula layout e pintura quando chegam perto
+   da tela (deixa a primeira pintura bem mais rápida no celular) */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+.cv-card {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 420px;
+}
+
+/* painel no celular: ao focar um campo, o navegador deixa espaço para as barras fixas
+   (menu de baixo e botão "Salvar") não cobrirem o que está sendo digitado */
+:root:has(.admin-shell) {
+  scroll-padding-top: 1rem;
+  scroll-padding-bottom: 9.5rem;
+}
+@media (min-width: 1024px) {
+  :root:has(.admin-shell) {
+    scroll-padding-bottom: 1rem;
   }
 }

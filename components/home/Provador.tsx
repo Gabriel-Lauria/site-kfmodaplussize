@@ -4,16 +4,19 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "motion/react";
-import { BRAND, CONTACT, LOOKS as LOOK_SLUGS, PRODUCTS, type Product } from "@/config";
+import { BRAND, LOOKS as LOOK_SLUGS } from "@/config";
+import type { Product } from "@/lib/types";
+import { useSite } from "../SiteData";
 import { MirrorFrame } from "../MirrorFrame";
-import { Counter } from "../motion-utils";
+import { Counter } from "../Counter";
 import { Instagram } from "../Icons";
 
-const LOOKS = LOOK_SLUGS.map((slug) => PRODUCTS.find((p) => p.slug === slug)).filter(Boolean) as Product[];
 const TEXT = BRAND.provador;
 
 // No desktop a rolagem vertical vira um passeio horizontal pelo "provador".
 export function Provador() {
+  const site = useSite();
+  const LOOKS = (LOOK_SLUGS.map(site.find).filter(Boolean) as Product[]).concat(site.products).filter((p, i, all) => all.indexOf(p) === i).slice(0, 6);
   const section = useRef<HTMLElement>(null);
   const track = useRef<HTMLDivElement>(null);
   const [dist, setDist] = useState(0);
@@ -43,7 +46,7 @@ export function Provador() {
       <div className={desktop ? "sticky top-0 flex h-screen flex-col justify-center overflow-hidden" : "no-scrollbar overflow-x-auto"}>
         <motion.div ref={track} style={desktop ? { x } : undefined} className="flex w-max items-center gap-6 px-4 sm:px-8 md:gap-10 md:px-[6vw]">
           <div className="w-[78vw] shrink-0 sm:w-[420px]">
-            <p className="text-xs uppercase tracking-[0.24em] text-accent">{TEXT.eyebrow}</p>
+            <p className="text-xs uppercase tracking-[0.24em] text-primary">{TEXT.eyebrow}</p>
             <h2 className="mt-4 font-display text-5xl leading-[0.95] tracking-tight sm:text-7xl">
               {TEXT.title[0]}
               <br />
@@ -74,12 +77,12 @@ export function Provador() {
               ))}
             </div>
             <a
-              href={CONTACT.instagram}
+              href={site.content.contact.instagram}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-10 flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-primary via-accent to-highlight px-6 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-paper transition hover:brightness-110"
             >
-              <Instagram /> Seguir {CONTACT.instagramHandle}
+              <Instagram /> Seguir {site.instagramHandle}
             </a>
           </div>
         </motion.div>

@@ -1,10 +1,7 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Montserrat } from "next/font/google";
 import "./globals.css";
-import { Providers } from "@/components/Providers";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { BRAND, CONTACT, FEATURES, SITE_URL, STORES, formatPhone, storageKey } from "@/config";
+import { BRAND, FEATURES, SITE_URL, storageKey } from "@/config";
 
 // ==== FONTES ==============================================================
 // Troque as duas importações e chamadas abaixo para mudar a tipografia.
@@ -36,33 +33,20 @@ export const metadata: Metadata = {
     images: [BRAND.seo.ogImage],
     locale: "pt_BR",
     type: "website",
+    siteName: BRAND.name,
   },
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ClothingStore",
-  name: BRAND.name,
-  description: BRAND.seo.schemaDescription,
-  telephone: formatPhone(CONTACT.whatsapp),
-  sameAs: [CONTACT.instagram, CONTACT.linktree].filter(Boolean),
-  areaServed: BRAND.seo.areaServed,
-  ...(STORES.length === 1 && {
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: STORES[0].area,
-      addressLocality: STORES[0].city,
-      addressRegion: STORES[0].state,
-      postalCode: STORES[0].postalCode,
-      addressCountry: "BR",
-    },
-  }),
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#fcf7f3",
 };
 
 // Sem a intro, o hero já começa sem esperar por ela.
 const INTRO_SCRIPT = FEATURES.showIntro
-  ? `try{if(sessionStorage.getItem('${storageKey("intro")}'))document.documentElement.classList.add('intro-done')}catch(e){}`
-  : `document.documentElement.classList.add('intro-done')`;
+  ? `document.documentElement.classList.add('js');try{if(sessionStorage.getItem('${storageKey("intro")}'))document.documentElement.classList.add('intro-done')}catch(e){}`
+  : `document.documentElement.classList.add('js','intro-done')`;
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
@@ -73,15 +57,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             __html: INTRO_SCRIPT,
           }}
         />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
-      <body className="antialiased">
-        <Providers>
-          <Header />
-          <main>{children}</main>
-          <Footer />
-        </Providers>
-      </body>
+      <body className="antialiased">{children}</body>
     </html>
   );
 }

@@ -30,7 +30,7 @@ export const BRAND = {
 
   seo: {
     title: `KF Moda Plus Size | Moda Curvy e Plus Size em ${CITY}`,
-    description: `Moda curvy e plus size do 42 ao 54 em ${CITY}, com envio para todo o Brasil. Conjuntos, vestidos, camisas e calças. Veja o catálogo e compre pelo WhatsApp.`,
+    description: `Moda curvy e plus size do 42 ao 54 em ${CITY}, com envio para todo o Brasil. Vestidos, macacões, conjuntos, camisas e calças. Veja o catálogo e compre pelo WhatsApp.`,
     ogTitle: "KF Moda Plus Size | Do 42 ao 54",
     ogDescription: "Modelagem que valoriza o corpo real. Loja em Curitiba e envio para todo o Brasil.",
     ogImage: "/brand/hero/hero.jpg",
@@ -71,7 +71,7 @@ export const BRAND = {
   // ícones: atributo "d" de um path 24x24 com traço
   perks: [
     { title: "Do 42 ao 54", text: "Modelagem para o corpo real", icon: "M8 3l4 3 4-3 3 4-3 2v12H8V9L5 7l3-4z" },
-    { title: "Compre pelo WhatsApp", text: "Atendimento de consultora", icon: "M4 5h16v11H8l-4 4V5z M8 10h8" },
+    { title: "Compre pelo WhatsApp", text: "Atendimento com consultora", icon: "M4 5h16v11H8l-4 4V5z M8 10h8" },
     { title: "Enviamos para todo o Brasil", text: `Ou prove na loja em ${CITY}`, icon: "M3 7l9-4 9 4v10l-9 4-9-4V7z M3 7l9 4 9-4 M12 11v10" },
     { title: "Novidades toda semana", text: `No ${CONTACT.instagramHandle}`, icon: "M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M6 18l2.5-2.5M15.5 8.5L18 6" },
   ],
@@ -84,7 +84,7 @@ export const BRAND = {
   featured: { eyebrow: "Em destaque", title: "Queridinhas da semana" },
 
   manifesto: {
-    text: "Moda plus size feita em Curitiba para mulheres que não querem se esconder. Modelagem que valoriza o corpo real, tecido que cai bem e o cuidado de quem prova cada peça antes de te mostrar.",
+    text: "Moda plus size feita em Curitiba para mulheres que não querem se esconder. Modelagem que valoriza o corpo real, tecido que cai bem e o cuidado de quem prova cada peça antes de mostrar para você.",
     // palavras destacadas em itálico
     highlight: ["real", "cuidado"],
   },
@@ -125,8 +125,8 @@ export const BRAND = {
     imageAlt: "Interior da loja KF Moda Plus Size, com araras e lustre",
     faqTitle: ["Antes de", "sair de casa"] as [string, string],
     faq: [
-      { q: "Qual o horário da loja?", a: "Chame no WhatsApp que a gente informa o horário e já deixa as peças separadas para você provar." },
-      { q: "Vocês enviam para fora de Curitiba?", a: "Sim, enviamos para todo o Brasil. Mande sua seleção pelo WhatsApp e a gente passa frete e prazo." },
+      { q: "Qual é o horário da loja?", a: "Chame no WhatsApp que a gente informa o horário e já deixa as peças separadas para você provar." },
+      { q: "Vocês enviam para fora de Curitiba?", a: "Sim, enviamos para todo o Brasil. Mande sua seleção pelo WhatsApp e a gente informa o frete e o prazo." },
       { q: "Qual a numeração das peças?", a: "Trabalhamos do 42 ao 54. Na dúvida entre dois tamanhos, mande suas medidas pelo WhatsApp que a gente ajuda." },
       { q: "Posso reservar uma peça para provar?", a: `Fale com a nossa equipe pelo WhatsApp ${CONTACT.whatsappLabel} e combinamos a melhor forma de te atender.` },
     ],
@@ -134,12 +134,12 @@ export const BRAND = {
   },
 
   catalog: {
-    metaDescription: "Conjuntos, vestidos, camisas e calças plus size do 42 ao 54. Escolha suas peças e peça pelo WhatsApp.",
-    intro: "Salve no coração o que você amar e envie sua seleção pelo WhatsApp. A gente confirma tamanho e cor e envia para todo o Brasil.",
+    metaDescription: "Vestidos, macacões, conjuntos, camisas e calças plus size do 42 ao 54. Escolha suas peças e faça o pedido pelo WhatsApp.",
+    intro: "Salve no coração o que você amar e envie sua seleção pelo WhatsApp. A gente confirma o tamanho e a cor e envia para todo o Brasil.",
   },
 
   product: {
-    note: "Na loja em Curitiba ou com envio para todo o Brasil. Confirme estoque pelo WhatsApp ou ",
+    note: "Prove na loja em Curitiba ou receba em todo o Brasil. Confirme o estoque pelo WhatsApp ou ",
     noteLink: "veja como chegar",
   },
 

@@ -4,25 +4,28 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
-import { BRAND, FEATURES, PRODUCTS, STORES_CTA } from "@/config";
+import { BRAND, FEATURES, STORES_CTA } from "@/config";
+import { useSite } from "../SiteData";
 import { BrandMark } from "../BrandMark";
 import { Magnetic } from "../Magnetic";
 import { MirrorFrame } from "../MirrorFrame";
-import { Counter, SplitWords } from "../motion-utils";
+import { Counter } from "../Counter";
+import { SplitWords } from "../motion-utils";
 import { ArrowRight, Pin } from "../Icons";
 import { PetalTrail } from "./PetalTrail";
 
 const HERO = BRAND.hero;
-const FEATURED = PRODUCTS.find((p) => p.slug === HERO.featuredSlug);
 
+// Atraso das animações do topo: espera a intro quando ela está ligada e ainda não rodou nesta sessão.
 export function useStartDelay() {
   const [delay] = useState(() =>
-    typeof document !== "undefined" && document.documentElement.classList.contains("intro-done") ? 0.15 : 1.9,
+    !FEATURES.showIntro || (typeof document !== "undefined" && document.documentElement.classList.contains("intro-done")) ? 0.15 : 1.9,
   );
   return delay;
 }
 
 export function Hero() {
+  const FEATURED = useSite().find(HERO.featuredSlug);
   const d = useStartDelay();
   const mx = useMotionValue(0);
   const my = useMotionValue(0);

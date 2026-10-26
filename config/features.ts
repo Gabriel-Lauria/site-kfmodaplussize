@@ -28,7 +28,7 @@ export const FEATURES: {
   // Grade padrão das peças (ver SIZE_PRESETS em products.ts).
   grade: "42-54",
   // Abertura animada com a marca, uma vez por sessão.
-  showIntro: true,
+  showIntro: false,
   // Bolha que segue o mouse no desktop.
   showCursor: true,
   // Partículas que caem do cursor no topo da home.

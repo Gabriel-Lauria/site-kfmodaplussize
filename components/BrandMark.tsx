@@ -1,7 +1,4 @@
-"use client";
-
 import { createElement, type CSSProperties, type ReactNode } from "react";
-import { motion } from "motion/react";
 import { MARK } from "@/config/brand-mark.generated";
 
 export type MarkNode =
@@ -11,7 +8,7 @@ export type MarkData = { viewBox: string; props: Record<string, unknown>; childr
 
 type Props = {
   className?: string;
-  // os elementos de primeiro nível do SVG surgem em sequência, com mola
+  // os elementos de primeiro nível do SVG surgem em sequência, com mola (CSS .bloom-part)
   bloom?: boolean;
   delay?: number;
   // pinta a marca inteira de uma cor só (aceita var(--color-...))
@@ -55,15 +52,9 @@ export function BrandMark({ className, bloom = false, delay = 0, mono, title }: 
         if (!bloom || !el) return el;
         const own = typeof node === "string" ? undefined : node.delay;
         return (
-          <motion.g
-            key={i}
-            style={{ transformBox: "fill-box", transformOrigin: "center" }}
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: delay + (own ?? i * 0.08), type: "spring", stiffness: 260, damping: 16 }}
-          >
+          <g key={i} className="bloom-part" style={{ animationDelay: `${delay + (own ?? i * 0.08)}s` }}>
             {el}
-          </motion.g>
+          </g>
         );
       })}
     </svg>

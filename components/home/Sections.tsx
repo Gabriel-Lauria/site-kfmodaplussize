@@ -4,7 +4,8 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
-import { BRAND, CONTACT, HOME_CATEGORIES, PRODUCTS, waLink } from "@/config";
+import { BRAND } from "@/config";
+import { useSite } from "../SiteData";
 import { BrandMark } from "../BrandMark";
 import { Magnetic } from "../Magnetic";
 import { ProductCard } from "../ProductCard";
@@ -41,9 +42,17 @@ export function Perks() {
   );
 }
 
-const CATS = HOME_CATEGORIES;
 
 export function Categories() {
+  const site = useSite();
+  const CATS = site.categories
+    .filter((c) => c.showOnHome)
+    .map((c) => {
+      const items = site.products.filter((p) => p.categorySlug === c.slug);
+      const image = c.image ?? items[0]?.image ?? "";
+      return { name: c.name, slug: c.slug, image, hover: items.find((p) => p.image !== image)?.image ?? image };
+    })
+    .filter((c) => c.image);
   return (
     <section className="mx-auto max-w-[1400px] px-4 py-16 sm:px-8">
       <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
@@ -72,7 +81,7 @@ export function Categories() {
             }}
             className={i % 2 === 1 ? "lg:mt-16" : undefined}
           >
-            <Link href={`/catalogo?categoria=${encodeURIComponent(c.name)}`} data-cursor="Explorar" className="group relative block aspect-[3/4] overflow-hidden rounded-[24px]">
+            <Link href={`/catalogo?categoria=${c.slug}`} data-cursor="Explorar" className="group relative block aspect-[3/4] overflow-hidden rounded-[24px]">
               <Image src={c.image} alt={c.name} fill sizes="(min-width:1024px) 25vw, 50vw" className="object-cover transition duration-[1.2s] ease-[var(--ease-expo)] group-hover:scale-110 group-hover:opacity-0" />
               <Image src={c.hover} alt="" fill sizes="(min-width:1024px) 25vw, 50vw" className="scale-110 object-cover opacity-0 transition duration-[1.2s] ease-[var(--ease-expo)] group-hover:scale-100 group-hover:opacity-100" />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/0 to-ink/0" />
@@ -93,7 +102,8 @@ export function Categories() {
 
 export function Featured() {
   const track = useRef<HTMLDivElement>(null);
-  const featured = PRODUCTS.filter((p) => p.tag).concat(PRODUCTS.filter((p) => !p.tag)).slice(0, 8);
+  const { products } = useSite();
+  const featured = products.filter((p) => p.featured && p.stock > 0).slice(0, 8);
   const scroll = (dir: number) => track.current?.scrollBy({ left: dir * track.current.clientWidth * 0.8, behavior: "smooth" });
 
   return (
@@ -101,7 +111,7 @@ export function Featured() {
       <div className="mx-auto mb-10 flex max-w-[1400px] flex-wrap items-end justify-between gap-6 px-4 sm:px-8">
         <div>
           <Reveal>
-            <p className="text-xs uppercase tracking-[0.24em] text-accent">{BRAND.featured.eyebrow}</p>
+            <p className="text-xs uppercase tracking-[0.24em] text-primary">{BRAND.featured.eyebrow}</p>
           </Reveal>
           <h2 className="mt-3 font-display text-5xl tracking-tight sm:text-6xl">
             <SplitWords text={BRAND.featured.title} />
@@ -170,6 +180,7 @@ export function Manifesto() {
 }
 
 export function FinalCta() {
+  const site = useSite();
   const [hover, setHover] = useState(false);
   return (
     <section className="mx-auto max-w-[1400px] px-4 sm:px-8">
@@ -190,7 +201,7 @@ export function FinalCta() {
         <div className="relative mt-10 flex flex-wrap items-center justify-center gap-4" onPointerEnter={() => setHover(true)} onPointerLeave={() => setHover(false)}>
           <Magnetic strength={0.5}>
             <a
-              href={waLink(BRAND.finalCta.message)}
+              href={site.wa(BRAND.finalCta.message)}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 rounded-full bg-primary px-8 py-5 text-sm font-semibold uppercase tracking-[0.14em] text-paper shadow-[0_20px_50px_-15px_color-mix(in_srgb,var(--color-primary)_70%,transparent)] transition hover:bg-primary-deep"
@@ -199,8 +210,8 @@ export function FinalCta() {
             </a>
           </Magnetic>
           <Magnetic>
-            <a href={CONTACT.instagram} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 rounded-full border border-ink/20 px-7 py-5 text-sm font-semibold uppercase tracking-[0.14em] transition hover:border-primary hover:text-primary">
-              <Instagram /> {CONTACT.instagramHandle}
+            <a href={site.content.contact.instagram} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 rounded-full border border-ink/20 px-7 py-5 text-sm font-semibold uppercase tracking-[0.14em] transition hover:border-primary hover:text-primary">
+              <Instagram /> {site.instagramHandle}
             </a>
           </Magnetic>
         </div>

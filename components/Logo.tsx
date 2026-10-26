@@ -1,7 +1,4 @@
-"use client";
-
 import Image from "next/image";
-import { motion } from "motion/react";
 import { BRAND } from "@/config";
 import { BrandMark } from "./BrandMark";
 
@@ -11,7 +8,7 @@ type Props = {
   imageClassName?: string;
   // 2ª parte do wordmark em itálico na cor primária
   accent?: boolean;
-  // a marca gira no hover
+  // a marca gira no hover do link (o link pai precisa da classe "group")
   spin?: boolean;
 };
 
@@ -24,9 +21,7 @@ export function Logo({ markClassName, textClassName, imageClassName = "h-9 w-aut
   return (
     <>
       {spin ? (
-        <motion.span whileHover={{ rotate: 120 }} transition={{ type: "spring", stiffness: 200, damping: 12 }} className="block">
-          {mark}
-        </motion.span>
+        <span className="block transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:rotate-[120deg]">{mark}</span>
       ) : (
         mark
       )}
