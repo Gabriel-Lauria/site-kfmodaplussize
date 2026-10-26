@@ -27,7 +27,7 @@ export function StoreVisit({ variant = "home" }: { variant?: "home" | "page" }) 
             <p className="text-xs uppercase tracking-[0.24em] text-accent-soft">{variant === "home" ? BRAND.stores.eyebrowHome : BRAND.stores.eyebrowPage}</p>
             <h2 className="mt-4 font-display text-5xl leading-[0.95] tracking-tight sm:text-7xl">
               <SplitWords text="Visite a loja." />
-              <br />
+              {" "}<br />
               <SplitWords text={BRAND.stores.titleAccent} delay={0.15} className="italic text-accent" />
             </h2>
             <Reveal>

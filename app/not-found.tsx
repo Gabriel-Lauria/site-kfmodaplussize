@@ -1,7 +1,10 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { BrandMark } from "@/components/BrandMark";
 import { SiteShell } from "@/components/SiteShell";
 import { BRAND } from "@/config";
+
+export const metadata: Metadata = { title: "Página não encontrada" };
 
 export default function NotFound() {
   return (

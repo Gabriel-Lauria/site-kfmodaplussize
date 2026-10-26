@@ -76,7 +76,7 @@ export function EditorialHero({ data }: Props) {
           </div>
           <h1 className="mt-5 font-display text-[clamp(2.75rem,5vw,4.6rem)] font-light leading-[0.95] tracking-[-0.01em]">
             <SplitWords text={H.title[0]} onView={false} delay={d + 0.1} />
-            <br />
+            {" "}<br />
             <SplitWords text={H.title[1]} onView={false} delay={d + 0.3} className="italic text-primary" />
           </h1>
           <p className="fade-up mt-5 max-w-md text-[17px] leading-relaxed text-ink/75" style={{ animationDelay: `${d + 0.4}s` }}>
@@ -219,7 +219,7 @@ export function PromoBand({ data }: Props) {
           <Eyebrow className="text-accent-soft">{P.eyebrow}</Eyebrow>
           <p className="mt-4 font-display text-6xl uppercase leading-[0.88] tracking-[0.02em] sm:text-7xl">
             <SplitWords text={P.title[0]} />
-            <br />
+            {" "}<br />
             <SplitWords text={P.title[1]} delay={0.15} className="italic text-highlight" />
           </p>
         </div>
@@ -427,10 +427,10 @@ export function ContactBlock({ data }: Props) {
                   <dd className="mt-2">
                     {c.street}
                     {c.district && <> · {c.district}</>}
-                    <br />
+                    {" "}<br />
                     {city}
                     {c.postalCode && <> · {c.postalCode}</>}
-                    <br />
+                    {" "}<br />
                     <a href={mapsUrl(`${BRAND.name} ${c.street} ${c.city}`)} target="_blank" rel="noopener noreferrer" className="mt-1 inline-flex min-h-11 items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-primary hover:text-ink">
                       <Pin className="h-4 w-4" /> Como chegar
                     </a>

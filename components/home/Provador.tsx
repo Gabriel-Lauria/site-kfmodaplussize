@@ -49,7 +49,7 @@ export function Provador() {
             <p className="text-xs uppercase tracking-[0.24em] text-primary">{TEXT.eyebrow}</p>
             <h2 className="mt-4 font-display text-5xl leading-[0.95] tracking-tight sm:text-7xl">
               {TEXT.title[0]}
-              <br />
+              {" "}<br />
               <em className="text-primary">{TEXT.title[1]}</em>
             </h2>
             <p className="mt-6 max-w-sm text-ink/70">{TEXT.text}</p>

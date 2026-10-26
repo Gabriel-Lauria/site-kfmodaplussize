@@ -67,9 +67,9 @@ export function Hero() {
 
             <h1 className="mt-6 font-display text-[clamp(3.2rem,8.5vw,7.5rem)] font-light leading-[0.92] tracking-[-0.02em]">
               <SplitWords text={HERO.title[0]} onView={false} delay={d + 0.1} />
-              <br />
+              {" "}<br />
               <SplitWords text={HERO.title[1]} onView={false} delay={d + 0.3} />
-              <br />
+              {" "}<br />
               <SplitWords text={HERO.title[2]} onView={false} delay={d + 0.45} className="italic text-accent" />
             </h1>
 

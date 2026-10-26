@@ -13,6 +13,8 @@ const PAGE = BRAND.storesPage;
 export const metadata: Metadata = {
   title: STORES_NAV,
   description: PAGE.metaDescription,
+  alternates: { canonical: "/lojas" },
+  openGraph: { title: `${STORES_NAV} · ${BRAND.name}`, description: PAGE.metaDescription, images: [BRAND.seo.ogImage], siteName: BRAND.name, locale: "pt_BR", type: "website" },
 };
 
 export default async function LojasPage() {
@@ -31,9 +33,9 @@ export default async function LojasPage() {
           <p className="text-xs uppercase tracking-[0.24em] text-primary">{PAGE.eyebrow}</p>
           <h1 className="mt-4 font-display text-[clamp(3.2rem,8vw,7rem)] font-light leading-[0.92] tracking-tight">
             <SplitWords text={PAGE.title[0]} onView={false} delay={0.4} />
-            <br />
+            {" "}<br />
             <SplitWords text={PAGE.title[1]} onView={false} delay={0.6} className="italic text-primary" />
-            <br />
+            {" "}<br />
             <SplitWords text={PAGE.title[2]} onView={false} delay={0.75} />
           </h1>
           {FEATURES.showStores && (
@@ -62,7 +64,7 @@ export default async function LojasPage() {
         <div>
           <h2 className="font-display text-5xl leading-[0.95] tracking-tight">
             <SplitWords text={PAGE.faqTitle[0]} />
-            <br />
+            {" "}<br />
             <SplitWords text={PAGE.faqTitle[1]} delay={0.15} className="italic text-primary" />
           </h2>
           <Reveal>

@@ -60,7 +60,7 @@ export function Footer() {
                 <Link className="block leading-relaxed transition hover:text-accent" href="/lojas">
                   {c.street}
                   {c.district && <> · {c.district}</>}
-                  <br />
+                  {" "}<br />
                   {[c.city, c.state].filter(Boolean).join(" · ")}
                   {c.postalCode && <> · {c.postalCode}</>}
                 </Link>

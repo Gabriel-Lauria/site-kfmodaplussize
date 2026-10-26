@@ -58,7 +58,7 @@ export function Categories() {
       <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
         <h2 className="font-display text-5xl leading-[0.95] tracking-tight sm:text-6xl">
           <SplitWords text={BRAND.categories.title[0]} />
-          <br />
+          {" "}<br />
           <SplitWords text={BRAND.categories.title[1]} delay={0.15} className="italic text-primary" />
         </h2>
         <Reveal>
@@ -194,7 +194,7 @@ export function FinalCta() {
         <p className="relative text-xs uppercase tracking-[0.24em] text-primary">{BRAND.finalCta.eyebrow}</p>
         <h2 className="relative mx-auto mt-4 max-w-3xl font-display text-5xl leading-[0.95] tracking-tight sm:text-7xl">
           <SplitWords text={BRAND.finalCta.title[0]} />
-          <br />
+          {" "}<br />
           <SplitWords text={BRAND.finalCta.title[1]} delay={0.2} className="italic text-primary" />
         </h2>
         <p className="relative mx-auto mt-6 max-w-md text-ink/70">{BRAND.finalCta.text}</p>
