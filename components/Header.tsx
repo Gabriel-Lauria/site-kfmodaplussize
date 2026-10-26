@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useAnimationControls, useMotionValueEvent, useScroll } from "motion/react";
-import { BRAND, CONTACT, STORES_NAV, waLink } from "@/config";
+import { BRAND, CONTACT, FEATURES, STORES_NAV, waLink } from "@/config";
 import { lockScroll } from "@/lib/lenis";
 import { BrandMark } from "./BrandMark";
 import { Logo } from "./Logo";
@@ -18,6 +18,32 @@ const LINKS = [
 ];
 
 const ANNOUNCEMENTS = BRAND.announcements;
+const EDITORIAL = FEATURES.layout === "editorial";
+
+// Layout editorial: um aviso por vez, centralizado, trocando a cada 4 s.
+function AnnouncementFade() {
+  const [i, setI] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setI((n) => (n + 1) % ANNOUNCEMENTS.length), 4000);
+    return () => clearInterval(t);
+  }, []);
+  return (
+    <div className="relative h-[2.1rem] overflow-hidden bg-ink text-center text-[11px] uppercase tracking-[0.22em] text-paper/85">
+      <AnimatePresence initial={false}>
+        <motion.p
+          key={i}
+          className="absolute inset-0 flex items-center justify-center px-4"
+          initial={{ y: "100%", opacity: 0 }}
+          animate={{ y: "0%", opacity: 1 }}
+          exit={{ y: "-100%", opacity: 0 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        >
+          {ANNOUNCEMENTS[i]}
+        </motion.p>
+      </AnimatePresence>
+    </div>
+  );
+}
 
 export function Header() {
   const pathname = usePathname();
@@ -51,20 +77,24 @@ export function Header() {
         animate={{ y: hidden && !menu ? "-100%" : "0%" }}
         transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="overflow-hidden bg-primary-deep py-2 text-[11px] uppercase tracking-[0.18em] text-accent-soft">
-          <div className="flex w-max animate-marquee">
-            {[0, 1].map((k) => (
-              <div key={k} className="flex shrink-0 items-center" aria-hidden={k === 1}>
-                {[...ANNOUNCEMENTS, ...ANNOUNCEMENTS].map((a, i) => (
-                  <span key={i} className="flex items-center gap-6 px-6">
-                    {a}
-                    <BrandMark mono="var(--color-accent)" className="h-2.5 w-2.5" />
-                  </span>
-                ))}
-              </div>
-            ))}
+        {EDITORIAL ? (
+          <AnnouncementFade />
+        ) : (
+          <div className="overflow-hidden bg-primary-deep py-2 text-[11px] uppercase tracking-[0.18em] text-accent-soft">
+            <div className="flex w-max animate-marquee">
+              {[0, 1].map((k) => (
+                <div key={k} className="flex shrink-0 items-center" aria-hidden={k === 1}>
+                  {[...ANNOUNCEMENTS, ...ANNOUNCEMENTS].map((a, i) => (
+                    <span key={i} className="flex items-center gap-6 px-6">
+                      {a}
+                      <BrandMark mono="var(--color-accent)" className="h-2.5 w-2.5" />
+                    </span>
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         <nav className="border-b border-ink/5 bg-paper/80 backdrop-blur-xl">
           <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-4 sm:px-8">
@@ -77,11 +107,24 @@ export function Header() {
                 const active = l.href === "/" ? pathname === "/" : pathname.startsWith(l.href);
                 return (
                   <li key={l.href} className="relative">
-                    <Link href={l.href} className={`relative z-10 block px-4 py-2 text-sm transition-colors ${active ? "text-paper" : "text-ink/75 hover:text-ink"}`}>
-                      {l.label}
-                    </Link>
-                    {active && (
-                      <motion.span layoutId="nav-pill" className="absolute inset-0 rounded-full bg-primary" transition={{ type: "spring", stiffness: 380, damping: 32 }} />
+                    {EDITORIAL ? (
+                      <>
+                        <Link href={l.href} className={`block px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.22em] transition-colors ${active ? "text-ink" : "text-ink/60 hover:text-ink"}`}>
+                          {l.label}
+                        </Link>
+                        {active && (
+                          <motion.span layoutId="nav-line" className="absolute inset-x-4 -bottom-0.5 h-px bg-primary" transition={{ type: "spring", stiffness: 380, damping: 32 }} />
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        <Link href={l.href} className={`relative z-10 block px-4 py-2 text-sm transition-colors ${active ? "text-paper" : "text-ink/75 hover:text-ink"}`}>
+                          {l.label}
+                        </Link>
+                        {active && (
+                          <motion.span layoutId="nav-pill" className="absolute inset-0 rounded-full bg-primary" transition={{ type: "spring", stiffness: 380, damping: 32 }} />
+                        )}
+                      </>
                     )}
                   </li>
                 );
@@ -118,7 +161,7 @@ export function Header() {
                 href={waLink(BRAND.messages.default)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-paper transition hover:bg-primary sm:flex"
+                className={`hidden items-center gap-2 bg-ink px-4 py-2.5 text-xs font-semibold uppercase text-paper transition hover:bg-primary sm:flex ${EDITORIAL ? "tracking-[0.18em]" : "rounded-full tracking-[0.12em]"}`}
               >
                 <WhatsApp className="h-4 w-4" /> Fale com a gente
               </a>

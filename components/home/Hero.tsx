@@ -15,7 +15,7 @@ import { PetalTrail } from "./PetalTrail";
 const HERO = BRAND.hero;
 const FEATURED = PRODUCTS.find((p) => p.slug === HERO.featuredSlug);
 
-function useStartDelay() {
+export function useStartDelay() {
   const [delay] = useState(() =>
     typeof document !== "undefined" && document.documentElement.classList.contains("intro-done") ? 0.15 : 1.9,
   );

@@ -4,8 +4,15 @@ import { STORES } from "./stores";
 // "comprar": botões pedem a peça pelo WhatsApp.
 // "agendar-prova": botões pedem um horário para provar na loja.
 export type CtaMode = "comprar" | "agendar-prova";
+// "classic": hero escuro com moldura de espelho, vitrine em carrossel, provador horizontal.
+// "editorial": hero claro dividido, categorias em blocos, grade de produtos, lookbook e faixa promocional.
+export type Layout = "classic" | "editorial";
+// Moldura das fotos grandes: "mirror" (ondulada), "arch" (arco no topo) ou "straight" (cantos retos).
+export type Frame = "mirror" | "arch" | "straight";
 
 export const FEATURES: {
+  layout: Layout;
+  frame: Frame;
   showStores: boolean;
   ctaMode: CtaMode;
   grade: SizePreset;
@@ -13,6 +20,8 @@ export const FEATURES: {
   showCursor: boolean;
   showPetalTrail: boolean;
 } = {
+  layout: "classic",
+  frame: "mirror",
   // Vitrine com mapa e filtro por região. Com 1 loja vira o bloco "Visite a loja".
   showStores: STORES.length > 1,
   ctaMode: "comprar",

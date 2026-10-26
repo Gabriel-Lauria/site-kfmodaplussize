@@ -34,9 +34,11 @@ O script pergunta:
 | Número de lojas | `1` | `stores.ts` (com 1 loja, pergunta endereço e CEP) |
 | ctaMode | `comprar` ou `agendar-prova` | `features.ts` |
 | Grade | `P-GG`, `PP-GG`, `G1-G5`, `42-54`, `36-46` | `features.ts` |
+| Layout da home | `classic` ou `editorial` | `features.ts` (ver abaixo) |
+| Moldura das fotos | `mirror`, `arch`, `straight` | `features.ts` |
 | Placeholders? | `s` | copia `template/placeholders/brand` → `public/brand` e escreve um `products.ts` de exemplo |
 
-Para repetir sem digitar, salve as respostas num JSON com as mesmas chaves (`name`, `slug`, `primary`, `accent`, `whatsapp`, `instagram`, `city`, `state`, `stores`, `address`, `postalCode`, `ctaMode`, `grade`, `placeholders`) e rode `npm run novo-cliente -- --from cliente.json`.
+Para repetir sem digitar, salve as respostas num JSON com as mesmas chaves (`name`, `slug`, `primary`, `accent`, `whatsapp`, `instagram`, `city`, `state`, `stores`, `address`, `postalCode`, `ctaMode`, `grade`, `layout`, `frame`, `placeholders`) e rode `npm run novo-cliente -- --from cliente.json`.
 
 > Rode `npm run dev` logo depois: o site já abre com a paleta e os placeholders do cliente.
 
@@ -91,7 +93,20 @@ Dicas: deixe o rosto no terço de cima (os cards cortam o topo e a base). Prints
 - **Nome gigante do rodapé**: usa o `wordmark` (com a marca no meio). Se o nome for longo e cortar, defina `footer.wordmark` com uma versão curta (a KF usa `["Plus", "Size"]`).
 - **Cores**: bloco `palette:start … palette:end` no topo do `app/globals.css`. Cada token está comentado. Confira o contraste: `primary` e `accent` aparecem como texto sobre o fundo claro; `accent-soft` aparece como texto sobre `primary-deep`.
 - **Fontes**: bloco `FONTES` em `app/layout.tsx`. Troque as duas chamadas do `next/font/google` mantendo as variáveis `--font-brand-display` e `--font-brand-sans`. A fonte de títulos precisa ter itálico.
-- **Recursos** (`config/features.ts`): `ctaMode`, `grade`, `showIntro` (abertura animada), `showCursor` (bolha do mouse), `showPetalTrail` (partículas no hero; as cores são `particle-1..4` da paleta).
+- **Recursos** (`config/features.ts`): `layout`, `frame`, `ctaMode`, `grade`, `showIntro` (abertura animada), `showCursor` (bolha do mouse), `showPetalTrail` (partículas no hero classic; as cores são `particle-1..4` da paleta).
+
+### Dois layouts, para dois clientes não terem o mesmo site
+
+| | `classic` (Espaço Flor) | `editorial` (KF) |
+|---|---|---|
+| Faixa do topo | avisos correndo em marquee | um aviso por vez, centralizado |
+| Menu | pílula colorida no link ativo | caixa alta com sublinhado |
+| Hero | bloco escuro, selo giratório, partículas | bloco claro dividido, 3 diferenciais, foto em arco + foto menor |
+| Home | perks → categorias → carrossel → lojas → manifesto → provador horizontal → CTA | categorias em blocos escuros → grade de 6 produtos → lookbook → faixa escura → Instagram → história + lista VIP |
+| Rodapé | `primary-deep` com o nome gigante | `ink`, sem o nome gigante |
+| Cantos | bem arredondados | quase retos |
+
+Combine com `frame` (`mirror` ondulada, `arch` em arco, `straight`), paleta e fontes para separar ainda mais. Os textos e as fotos das seções editoriais ficam em **`config/editorial.ts`**. A seção de depoimentos só aparece se `testimonials` tiver itens: use apenas depoimentos reais, com autorização.
 
 ## 6. Conferir e publicar
 
@@ -123,7 +138,8 @@ config/
   brand.ts       identidade, contatos, SEO, textos e mensagens
   products.ts    categorias, grades, produtos, capas da home, looks
   stores.ts      lojas, regiões, mapa ilustrativo
-  features.ts    showStores, ctaMode, grade, showIntro, showCursor, showPetalTrail
+  features.ts    layout, frame, showStores, ctaMode, grade, showIntro, showCursor, showPetalTrail
+  editorial.ts   textos e fotos das seções do layout editorial
   index.ts       o que os componentes importam (+ waLink, mapsLink, CTA...)
   brand-mark.generated.ts   gerado a partir do mark.svg (não editar)
 public/brand/    mark.svg, logo.svg, products/, hero/

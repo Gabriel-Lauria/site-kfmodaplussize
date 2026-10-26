@@ -2,7 +2,7 @@
 //   npm run novo-cliente                      -> perguntas no terminal
 //   npm run novo-cliente -- --from cliente.json -> respostas de um arquivo (mesmas chaves de ANSWERS abaixo)
 //
-// Escreve: config/brand.ts, config/features.ts, config/stores.ts e a paleta em app/globals.css.
+// Escreve: config/brand.ts, features.ts, stores.ts, editorial.ts e a paleta em app/globals.css.
 // Opcional: troca fotos, marca e produtos pelos placeholders neutros de template/placeholders.
 import { cpSync, existsSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -63,6 +63,8 @@ const ANSWERS = [
   ["postalCode", "CEP (só se for 1 loja)", ""],
   ["ctaMode", "Botões de pedido: comprar | agendar-prova", "comprar"],
   ["grade", "Grade: P-GG | PP-GG | G1-G5 | 42-54 | 36-46", "P-GG"],
+  ["layout", "Layout da home: classic | editorial", "classic"],
+  ["frame", "Moldura das fotos: mirror | arch | straight", (a) => (a.layout === "editorial" ? "arch" : "mirror")],
   ["placeholders", "Trocar fotos, marca e produtos pelos placeholders neutros? (s/n)", "s"],
 ];
 
@@ -304,8 +306,15 @@ import { STORES } from "./stores";
 // "comprar": botões pedem a peça pelo WhatsApp.
 // "agendar-prova": botões pedem um horário para provar na loja.
 export type CtaMode = "comprar" | "agendar-prova";
+// "classic": hero escuro com moldura de espelho, vitrine em carrossel, provador horizontal.
+// "editorial": hero claro dividido, categorias em blocos, grade de produtos, lookbook e faixa promocional.
+export type Layout = "classic" | "editorial";
+// Moldura das fotos grandes: "mirror" (ondulada), "arch" (arco no topo) ou "straight" (cantos retos).
+export type Frame = "mirror" | "arch" | "straight";
 
 export const FEATURES: {
+  layout: Layout;
+  frame: Frame;
   showStores: boolean;
   ctaMode: CtaMode;
   grade: SizePreset;
@@ -313,6 +322,8 @@ export const FEATURES: {
   showCursor: boolean;
   showPetalTrail: boolean;
 } = {
+  layout: ${js(a.layout)},
+  frame: ${js(a.frame)},
   // Vitrine com mapa e filtro por região. Com 1 loja vira o bloco "Visite a loja".
   showStores: STORES.length > 1,
   ctaMode: ${js(a.ctaMode)},
@@ -450,6 +461,72 @@ export const LOOKS = ["vestido-longo", "conjunto-alfaiataria", "camisa-cetim", "
 `;
 }
 
+function editorialTs(a) {
+  return `// Conteúdo das seções do layout "editorial" (FEATURES.layout). O layout "classic" não usa este arquivo.
+// As fotos saem dos produtos por padrão; troque por caminhos de /public/brand quando quiser outra.
+import { BRAND } from "./brand";
+import { LOOKS, PRODUCTS } from "./products";
+
+const photo = (slug: string) => PRODUCTS.find((p) => p.slug === slug)?.image ?? PRODUCTS[0].image;
+
+export const EDITORIAL = {
+  hero: {
+    eyebrow: BRAND.hero.eyebrow,
+    // 1ª linha normal, 2ª em itálico na cor primária — TODO: frase da marca
+    title: ["Estilo que fica,", "elegância que veste."] as [string, string],
+    text: BRAND.hero.text,
+    // foto grande + foto menor sobreposta
+    images: [BRAND.hero.image, PRODUCTS[1]?.image ?? PRODUCTS[0].image] as [string, string],
+    imageAlt: BRAND.hero.imageAlt,
+  },
+
+  // 3 diferenciais abaixo do botão do hero (usa os 3 primeiros perks de brand.ts)
+  values: BRAND.perks.slice(0, 3),
+
+  products: BRAND.featured,
+
+  lookbook: {
+    title: "Lookbook",
+    text: "Combinações montadas na loja, do jeito que a gente veste. Escolha a sua e peça pelo WhatsApp.",
+    button: "Ver os looks",
+    slugs: LOOKS.slice(0, 4),
+  },
+
+  // faixa escura no meio da página — TODO: chamada da marca
+  promo: {
+    eyebrow: "Novidades toda semana",
+    title: ["Nova", "coleção"] as [string, string],
+    text: "Peças novas chegando toda semana. Fale com a gente para saber o que acabou de chegar no seu tamanho.",
+    button: "Falar com uma consultora",
+    message: ${js(`Olá! Vim pelo site da ${a.name} e quero ver as novidades.`)},
+    image: photo(LOOKS[0] ?? PRODUCTS[0].slug),
+  },
+
+  // Use só depoimentos reais, com autorização da cliente. Lista vazia = seção escondida.
+  testimonials: [] as { quote: string; name: string }[],
+
+  instagram: {
+    title: ["Siga no", "Instagram"] as [string, string],
+    images: PRODUCTS.slice(0, 6).map((p) => p.image),
+  },
+
+  story: {
+    title: "Nossa história",
+    text: BRAND.manifesto.text,
+    image: BRAND.storesPage.image,
+  },
+
+  // cartão ao lado da história: lista VIP pelo WhatsApp (sem formulário nem servidor)
+  vip: {
+    title: "Lista VIP",
+    text: "Receba os lançamentos da semana antes de todo mundo, direto no seu WhatsApp.",
+    button: "Quero entrar",
+    message: ${js(`Olá! Quero entrar na lista VIP da ${a.name} e receber as novidades.`)},
+  },
+};
+`;
+}
+
 function writePalette(colors) {
   const css = readFileSync(file("app/globals.css"), "utf8");
   const start = css.indexOf("/* palette:start */");
@@ -470,6 +547,8 @@ a.whatsapp = a.whatsapp.replace(/\D/g, "");
 if (!a.whatsapp.startsWith("55")) a.whatsapp = `55${a.whatsapp}`;
 a.slug = a.slug.toLowerCase().replace(/[^a-z0-9-]/g, "") || "loja";
 if (!["comprar", "agendar-prova"].includes(a.ctaMode)) throw new Error(`ctaMode inválido: ${a.ctaMode}`);
+if (!["classic", "editorial"].includes(a.layout)) throw new Error(`Layout inválido: ${a.layout}`);
+if (!["mirror", "arch", "straight"].includes(a.frame)) throw new Error(`Moldura inválida: ${a.frame}`);
 if (!["P-GG", "PP-GG", "G1-G5", "42-54", "36-46"].includes(a.grade)) throw new Error(`Grade inválida: ${a.grade}`);
 const usePlaceholders = /^s/i.test(String(a.placeholders));
 
@@ -494,11 +573,12 @@ if (usePlaceholders) {
 writeFileSync(file("config/brand.ts"), brandTs(a, img));
 writeFileSync(file("config/features.ts"), featuresTs(a));
 writeFileSync(file("config/stores.ts"), storesTs(a));
+writeFileSync(file("config/editorial.ts"), editorialTs(a));
 writePalette(palette(a));
 
 console.log(`
 Pronto: ${a.name} configurado.
-  config/brand.ts, features.ts, stores.ts${usePlaceholders ? ", products.ts" : ""} e a paleta em app/globals.css
+  config/brand.ts, features.ts, stores.ts, editorial.ts${usePlaceholders ? ", products.ts" : ""} e a paleta em app/globals.css
 ${usePlaceholders ? "  public/brand: marca, logo e fotos trocadas pelos placeholders\n" : ""}
 Próximos passos (TEMPLATE.md):
   1. troque public/brand/mark.svg e logo.svg pela marca do cliente

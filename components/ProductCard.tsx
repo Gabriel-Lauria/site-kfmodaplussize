@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
-import { CTA, waLink, type Product } from "@/config";
+import { CTA, FEATURES, waLink, type Product } from "@/config";
 import { useSelection } from "./Selection";
 import { Heart, WhatsApp } from "./Icons";
 
@@ -53,11 +53,13 @@ export function HeartButton({ product, className }: { product: Product; classNam
   );
 }
 
+const EDITORIAL = FEATURES.layout === "editorial";
+
 export function ProductCard({ product, onOpen, priority }: { product: Product; onOpen?: (slug: string) => void; priority?: boolean }) {
   const [hover, setHover] = useState(false);
 
   const media = (
-    <motion.div layoutId={`img-${product.slug}`} className="relative aspect-[3/4] overflow-hidden rounded-[22px] bg-cream">
+    <motion.div layoutId={`img-${product.slug}`} className={`relative aspect-[3/4] overflow-hidden bg-cream ${EDITORIAL ? "rounded-sm" : "rounded-[22px]"}`}>
       <motion.div className="absolute inset-0" animate={{ scale: hover ? 1.06 : 1 }} transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}>
         <Image src={product.image} alt={product.name} fill priority={priority} sizes="(min-width:1024px) 25vw, (min-width:640px) 45vw, 80vw" className="object-cover" />
         {product.hoverImage && (
@@ -67,7 +69,7 @@ export function ProductCard({ product, onOpen, priority }: { product: Product; o
         )}
       </motion.div>
       {product.tag && (
-        <span className="absolute left-3 top-3 max-w-[calc(100%-4.75rem)] truncate rounded-full bg-paper/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-primary backdrop-blur">
+        <span className={`absolute left-3 top-3 max-w-[calc(100%-4.75rem)] truncate px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] backdrop-blur ${EDITORIAL ? "bg-ink text-paper" : "rounded-full bg-paper/90 text-primary"}`}>
           {product.tag}
         </span>
       )}
@@ -93,7 +95,7 @@ export function ProductCard({ product, onOpen, priority }: { product: Product; o
           href={waLink(CTA.quick(product.name))}
           target="_blank"
           rel="noopener noreferrer"
-          className="absolute inset-x-3 bottom-3 hidden items-center justify-center gap-2 rounded-full bg-ink/90 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-paper backdrop-blur transition-colors hover:bg-primary md:flex"
+          className={`absolute inset-x-3 bottom-3 hidden items-center justify-center gap-2 bg-ink/90 py-2.5 ${EDITORIAL ? "" : "rounded-full"} text-xs font-semibold uppercase tracking-[0.12em] text-paper backdrop-blur transition-colors hover:bg-primary md:flex`}
           initial={false}
           animate={{ opacity: hover ? 1 : 0, y: hover ? 0 : 12 }}
           transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}

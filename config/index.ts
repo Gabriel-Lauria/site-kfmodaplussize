@@ -4,6 +4,7 @@ import { FEATURES } from "./features";
 import type { Store } from "./stores";
 
 export * from "./brand";
+export * from "./editorial";
 export * from "./features";
 export * from "./format";
 export * from "./products";
