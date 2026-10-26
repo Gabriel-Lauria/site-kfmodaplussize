@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { Fragment, useEffect, useRef } from "react";
 
 // As entradas ao rolar são CSS puro (.reveal / .words em globals.css): um IntersectionObserver
 // só acrescenta a classe "is-in". Nada de re-render nem de um componente animado por bloco,
@@ -57,12 +57,15 @@ export function SplitWords({
   return (
     <span ref={onView ? ref : undefined} className={`${onView ? "words" : "words-now"} ${className}`}>
       {words.map((w, i) => (
-        <span key={i} className="inline-block overflow-hidden pb-[0.12em] align-top">
-          <span className={`word inline-block ${wordClassName?.(w, i) ?? ""}`} style={{ "--word-delay": `${delay + i * 0.07}s` } as React.CSSProperties}>
-            {w}
+        <Fragment key={i}>
+          <span className="inline-block overflow-hidden pb-[0.12em] align-top">
+            <span className={`word inline-block ${wordClassName?.(w, i) ?? ""}`} style={{ "--word-delay": `${delay + i * 0.07}s` } as React.CSSProperties}>
+              {w}
+            </span>
           </span>
+          {/* o espaço fica fora da caixa inline-block: dentro dela o navegador o descarta e as palavras grudam */}
           {i < words.length - 1 && " "}
-        </span>
+        </Fragment>
       ))}
     </span>
   );
